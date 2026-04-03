@@ -663,7 +663,7 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
-            object-position: top;
+            object-position: center 20%;
         }
 
         .service-photos img:first-child {
@@ -1264,7 +1264,7 @@
             <div class="service-photos">
                 <img src="pro headshots/DSCF4332.jpg" alt="Professional headshot of a young man in a blue suit smiling warmly">
                 <img src="pro headshots/DSCF4338.jpg" alt="Professional headshot of a man in a dark blazer by a brick archway">
-                <img src="pro headshots/DSCF4341.jpg" alt="Professional headshot of a man in a grey suit with blue shirt">
+                <img src="pro headshots/will headshot.jpg" alt="Professional headshot of Will">
             </div>
             <div class="service-info">
                 <h2>Professional Headshots</h2>
@@ -1300,7 +1300,7 @@
             <img src="fun group session/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park">
             <img src="fun group session/DSCF2323.jpg" alt="Group of friends laughing together in autumn park setting">
             <img src="Suprise Engagments Photos/DSCF6629.jpg" alt="Engaged couple walking hand-in-hand on a forest path">
-            <img src="fun group session/DSCF3509.jpg" alt="Young woman smiling in a rose garden during autumn">
+            <img src="fun group session/emily solo photo.jpg" alt="Emily posing by pink roses in an autumn garden">
             <img src="Suprise Engagments Photos/DSCF6684.jpg" alt="Couple embracing at a stone wall overlook with mountain views">
             <img src="fun group session/DSCF3971.jpg" alt="Graduate twirling in a pink dress between tall stone columns">
             <img src="grad photos/jumping for joy.jpg" alt="Two graduates jumping for joy by a campus pond at golden hour">
@@ -1313,7 +1313,7 @@
             <img src="fun group session/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park">
             <img src="fun group session/DSCF2323.jpg" alt="Group of friends laughing together in autumn park setting">
             <img src="Suprise Engagments Photos/DSCF6629.jpg" alt="Engaged couple walking hand-in-hand on a forest path">
-            <img src="fun group session/DSCF3509.jpg" alt="Young woman smiling in a rose garden during autumn">
+            <img src="fun group session/emily solo photo.jpg" alt="Emily posing by pink roses in an autumn garden">
             <img src="Suprise Engagments Photos/DSCF6684.jpg" alt="Couple embracing at a stone wall overlook with mountain views">
             <img src="fun group session/DSCF3971.jpg" alt="Graduate twirling in a pink dress between tall stone columns">
             <img src="grad photos/jumping for joy.jpg" alt="Two graduates jumping for joy by a campus pond at golden hour">
@@ -1824,7 +1824,36 @@ function selectTime(el, time) {
 }
 
 // ===== FORM SUBMISSIONS =====
-// All forms use mailto: as a simple solution. For production, replace with a backend/API.
+// All forms use Web3Forms API to send emails directly from the browser.
+// Get your free access key at https://web3forms.com (enter santo.fothergill@gmail.com)
+const WEB3FORMS_KEY = 'bd50cec8-0097-4e74-bcbf-b1fce7701a65';
+
+async function sendForm(data, formContent, successEl, loadingMsg) {
+    const btn = formContent.querySelector('.form-submit');
+    const originalText = btn.textContent;
+    btn.textContent = loadingMsg || 'Sending...';
+    btn.disabled = true;
+
+    try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ access_key: WEB3FORMS_KEY, ...data })
+        });
+        const result = await response.json();
+        if (result.success) {
+            formContent.style.display = 'none';
+            successEl.style.display = 'block';
+            showToast('Message sent successfully!');
+        } else {
+            throw new Error(result.message || 'Something went wrong');
+        }
+    } catch (err) {
+        showToast('Failed to send: ' + err.message);
+        btn.textContent = originalText;
+        btn.disabled = false;
+    }
+}
 
 function submitContact(e) {
     e.preventDefault();
@@ -1832,17 +1861,11 @@ function submitContact(e) {
     const email = document.getElementById('contactEmail').value;
     const message = document.getElementById('contactMessage').value;
 
-    const subject = encodeURIComponent('New inquiry from ' + name);
-    const body = encodeURIComponent(
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n\n' +
-        'Message:\n' + message
+    sendForm(
+        { subject: 'New inquiry from ' + name, from_name: name, reply_to: email, message: message },
+        document.getElementById('contactFormContent'),
+        document.getElementById('contactSuccess')
     );
-    window.location.href = 'mailto:santo.fothergill@gmail.com?subject=' + subject + '&body=' + body;
-
-    document.getElementById('contactFormContent').style.display = 'none';
-    document.getElementById('contactSuccess').style.display = 'block';
-    showToast('Opening your email client...');
 }
 
 function submitWaitlist(e) {
@@ -1853,20 +1876,16 @@ function submitWaitlist(e) {
     const favCheckboxes = document.querySelectorAll('input[name="favorites"]:checked');
     const favorites = Array.from(favCheckboxes).map(cb => cb.value).join(', ') || 'None selected';
 
-    const subject = encodeURIComponent('Print Waitlist Signup - ' + name);
-    const body = encodeURIComponent(
-        'PRINT WAITLIST SIGNUP\n' +
-        '=====================\n\n' +
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Willing to pay: $' + price + '\n\n' +
-        'Favorite Photos:\n' + favorites
+    sendForm(
+        {
+            subject: 'Print Waitlist Signup - ' + name,
+            from_name: name,
+            reply_to: email,
+            message: 'PRINT WAITLIST SIGNUP\n=====================\n\nName: ' + name + '\nEmail: ' + email + '\nWilling to pay: $' + price + '\n\nFavorite Photos:\n' + favorites
+        },
+        document.getElementById('waitlistFormContent'),
+        document.getElementById('waitlistSuccess')
     );
-    window.location.href = 'mailto:santo.fothergill@gmail.com?subject=' + subject + '&body=' + body;
-
-    document.getElementById('waitlistFormContent').style.display = 'none';
-    document.getElementById('waitlistSuccess').style.display = 'block';
-    showToast('Opening your email client...');
 }
 
 function submitBooking(e) {
@@ -1882,23 +1901,17 @@ function submitBooking(e) {
     if (!date) { showToast('Please select a date'); return; }
     if (!time) { showToast('Please select a time'); return; }
 
-    const subject = encodeURIComponent('Booking Request from ' + name);
-    const body = encodeURIComponent(
-        'BOOKING REQUEST\n' +
-        '================\n\n' +
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Session Type: ' + type + '\n' +
-        'Number of People: ' + people + '\n' +
-        'Requested Date: ' + date + '\n' +
-        'Requested Time: ' + time + '\n\n' +
-        'Additional Notes:\n' + (notes || 'None')
+    sendForm(
+        {
+            subject: 'Booking Request from ' + name,
+            from_name: name,
+            reply_to: email,
+            message: 'BOOKING REQUEST\n================\n\nName: ' + name + '\nEmail: ' + email + '\nSession Type: ' + type + '\nNumber of People: ' + people + '\nRequested Date: ' + date + '\nRequested Time: ' + time + '\n\nAdditional Notes:\n' + (notes || 'None')
+        },
+        document.getElementById('bookingFormContent'),
+        document.getElementById('bookingSuccess'),
+        'Submitting...'
     );
-    window.location.href = 'mailto:santo.fothergill@gmail.com?subject=' + subject + '&body=' + body;
-
-    document.getElementById('bookingFormContent').style.display = 'none';
-    document.getElementById('bookingSuccess').style.display = 'block';
-    showToast('Opening your email client...');
 }
 
 // ===== INIT =====

@@ -926,6 +926,96 @@
             border-radius: 8px;
         }
 
+        /* ===== PHOTO DETAIL VIEW ===== */
+        .photo-detail-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .photo-detail-overlay.show {
+            display: flex;
+        }
+
+        .photo-detail {
+            background: white;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .photo-detail img {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            object-fit: cover;
+            border-radius: 20px 0 0 20px;
+        }
+
+        .photo-detail-info {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .photo-detail-info .detail-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            transition: color 0.3s;
+        }
+
+        .photo-detail-info .detail-close:hover {
+            color: var(--text-dark);
+        }
+
+        .photo-detail-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .photo-detail-info .detail-num {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .photo-detail-info .detail-story {
+            color: var(--text-med);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .photo-detail {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-detail img {
+                min-height: 250px;
+                border-radius: 20px 20px 0 0;
+            }
+        }
+
         /* Toast notification */
         .toast {
             position: fixed;
@@ -955,8 +1045,8 @@
         <a href="#" class="nav-logo" onclick="showPage('home')">Santo Fothergill</a>
         <ul class="nav-links" id="navLinks">
             <li><a href="#" class="active" data-page="home" onclick="showPage('home')">Home</a></li>
-            <li><a href="#" data-page="prints" onclick="showPage('prints')">Purchase Prints</a></li>
             <li><a href="#" data-page="book" onclick="showPage('book')">Book a Session</a></li>
+            <li><a href="#" data-page="prints" onclick="showPage('prints')">Purchase Prints / Explore My Work</a></li>
         </ul>
         <div class="hamburger" onclick="toggleNav()">
             <span></span><span></span><span></span>
@@ -1033,8 +1123,8 @@
         <h2 class="section-title">Hey, I'm Santo!</h2>
         <div class="about-content">
             <div class="about-photos">
-                <img src="Photos of me/DSCF5742.jpg" alt="Santo laughing on a mountain trail at golden hour wearing a blue jacket and beanie">
-                <img src="Photos of me/DSCF4156.jpg" alt="Santo hiking with a friend above a turquoise alpine lake surrounded by mountains">
+                <img src="Photos of me/03DF6660-28CC-406D-A1FB-E1473A4AE157-2176-00000062979DD095.jpg" alt="Santo with friends hiking through the Teton mountains on a sunny day">
+                <img src="Photos of me/Santo holding camera.jpg" alt="Santo photographing a mountain landscape at golden hour">
                 <img src="Photos of me/CD7FCACB-5BF1-49C1-8D68-71948BC03455-6096-000000F83EB2D25B.jpg" alt="Santo standing at a mountain summit trail marker with a large backpack">
             </div>
             <div>
@@ -1137,6 +1227,38 @@
 
     <div class="services">
 
+        <!-- Graduation Photos -->
+        <div class="service-card">
+            <div class="service-photos">
+                <img src="grad photos/jumping for joy.jpg" alt="Two graduates jumping for joy by a campus pond at golden hour">
+                <img src="grad photos/patchie.jpg" alt="Graduate smiling in cap and gown with gold tassel by the campus lake">
+                <img src="grad photos/ant.jpg" alt="Graduate beaming in cap and gown with dreamy bokeh lights at night">
+            </div>
+            <div class="service-info">
+                <h2>Graduation Photos</h2>
+                <p>You worked hard to get here -- let's celebrate it! Whether it's a solo cap-and-gown portrait or a session with your favorite campus spots, I'll make sure you walk away with photos as vibrant and joyful as this milestone deserves.</p>
+                <div class="price-tag">$50 per person &middot; $40/person for groups of 10+</div>
+                <br>
+                <a href="#" class="btn btn-primary" onclick="openModal('bookingModal')">Book Grad Photos</a>
+            </div>
+        </div>
+
+        <!-- Fun Group Sessions -->
+        <div class="service-card">
+            <div class="service-photos">
+                <img src="fun group session/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park">
+                <img src="fun group session/emily solo photo.jpg" alt="Portrait of Emily posing by pink roses in an autumn garden">
+                <img src="fun group session/DSCF2707.jpg" alt="Two friends playfully twirling together in a garden">
+            </div>
+            <div class="service-info">
+                <h2>Fun Group Sessions</h2>
+                <p>Grab your best friends and let's make some memories! Group sessions are perfect for celebrating friendships, matching outfits, or just having a blast in a beautiful location. Relaxed, fun, and full of personality.</p>
+                <div class="price-tag">$50 per person &middot; $40/person for groups of 10+</div>
+                <br>
+                <a href="#" class="btn btn-primary" onclick="openModal('bookingModal')">Book a Group Session</a>
+            </div>
+        </div>
+
         <!-- Professional Headshots -->
         <div class="service-card">
             <div class="service-photos">
@@ -1170,68 +1292,36 @@
             </div>
         </div>
 
-        <!-- Graduation Photos -->
-        <div class="service-card">
-            <div class="service-photos">
-                <img src="grad photos/DSCF4128.jpg" alt="Graduate laughing in cap and gown in front of green ivy wall">
-                <img src="grad photos/DSCF4204.jpg" alt="Graduate smiling in cap and gown with gold tassel by the campus lake">
-                <img src="grad photos/DSCF4554.jpg" alt="Graduate beaming in cap and gown with dreamy bokeh lights at night">
-            </div>
-            <div class="service-info">
-                <h2>Graduation Photos</h2>
-                <p>You worked hard to get here -- let's celebrate it! Whether it's a solo cap-and-gown portrait or a session with your favorite campus spots, I'll make sure you walk away with photos as vibrant and joyful as this milestone deserves.</p>
-                <div class="price-tag">$50 per person &middot; $40/person for groups of 10+</div>
-                <br>
-                <a href="#" class="btn btn-primary" onclick="openModal('bookingModal')">Book Grad Photos</a>
-            </div>
-        </div>
-
-        <!-- Fun Group Sessions -->
-        <div class="service-card">
-            <div class="service-photos">
-                <img src="grad photos/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park">
-                <img src="grad photos/DSCF3085.jpg" alt="Group of friends laughing together under the trees in a park">
-                <img src="grad photos/DSCF2707.jpg" alt="Two friends playfully twirling together in a garden">
-            </div>
-            <div class="service-info">
-                <h2>Fun Group Sessions</h2>
-                <p>Grab your best friends and let's make some memories! Group sessions are perfect for celebrating friendships, matching outfits, or just having a blast in a beautiful location. Relaxed, fun, and full of personality.</p>
-                <div class="price-tag">$50 per person &middot; $40/person for groups of 10+</div>
-                <br>
-                <a href="#" class="btn btn-primary" onclick="openModal('bookingModal')">Book a Group Session</a>
-            </div>
-        </div>
-
     </div>
 
     <!-- More session photos -->
     <div class="photo-strip" style="margin-top: 2rem;">
         <div class="photo-strip-inner">
-            <img src="grad photos/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park">
-            <img src="grad photos/DSCF2323.jpg" alt="Group of friends laughing together in autumn park setting">
+            <img src="fun group session/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park">
+            <img src="fun group session/DSCF2323.jpg" alt="Group of friends laughing together in autumn park setting">
             <img src="Suprise Engagments Photos/DSCF6629.jpg" alt="Engaged couple walking hand-in-hand on a forest path">
-            <img src="grad photos/DSCF3509.jpg" alt="Young woman smiling in a rose garden during autumn">
+            <img src="fun group session/DSCF3509.jpg" alt="Young woman smiling in a rose garden during autumn">
             <img src="Suprise Engagments Photos/DSCF6684.jpg" alt="Couple embracing at a stone wall overlook with mountain views">
-            <img src="grad photos/DSCF3971.jpg" alt="Graduate twirling in a pink dress between tall stone columns">
-            <img src="grad photos/DSCF4365.jpg" alt="Two graduates exchanging a handshake by the campus pond at dusk">
-            <img src="grad photos/DSCF4554.jpg" alt="Graduate beaming in cap and gown with dreamy bokeh lights at night">
+            <img src="fun group session/DSCF3971.jpg" alt="Graduate twirling in a pink dress between tall stone columns">
+            <img src="grad photos/jumping for joy.jpg" alt="Two graduates jumping for joy by a campus pond at golden hour">
+            <img src="grad photos/ant.jpg" alt="Graduate beaming in cap and gown with dreamy bokeh lights at night">
             <img src="pro headshots/DSCF4322.jpg" alt="Professional headshot of a young man in a blue plaid suit">
             <img src="pro headshots/DSCF7556.jpg" alt="Professional headshot with black suit and tie against a white backdrop">
-            <img src="grad photos/DSCF2707.jpg" alt="Two friends playfully twirling together in a garden">
-            <img src="grad photos/DSCF2734.jpg" alt="Young woman posing gracefully in a garden by stone steps">
+            <img src="fun group session/DSCF2707.jpg" alt="Two friends playfully twirling together in a garden">
+            <img src="fun group session/DSCF2734.jpg" alt="Young woman posing gracefully in a garden by stone steps">
             <!-- Duplicate -->
-            <img src="grad photos/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park">
-            <img src="grad photos/DSCF2323.jpg" alt="Group of friends laughing together in autumn park setting">
+            <img src="fun group session/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park">
+            <img src="fun group session/DSCF2323.jpg" alt="Group of friends laughing together in autumn park setting">
             <img src="Suprise Engagments Photos/DSCF6629.jpg" alt="Engaged couple walking hand-in-hand on a forest path">
-            <img src="grad photos/DSCF3509.jpg" alt="Young woman smiling in a rose garden during autumn">
+            <img src="fun group session/DSCF3509.jpg" alt="Young woman smiling in a rose garden during autumn">
             <img src="Suprise Engagments Photos/DSCF6684.jpg" alt="Couple embracing at a stone wall overlook with mountain views">
-            <img src="grad photos/DSCF3971.jpg" alt="Graduate twirling in a pink dress between tall stone columns">
-            <img src="grad photos/DSCF4365.jpg" alt="Two graduates exchanging a handshake by the campus pond at dusk">
-            <img src="grad photos/DSCF4554.jpg" alt="Graduate beaming in cap and gown with dreamy bokeh lights at night">
+            <img src="fun group session/DSCF3971.jpg" alt="Graduate twirling in a pink dress between tall stone columns">
+            <img src="grad photos/jumping for joy.jpg" alt="Two graduates jumping for joy by a campus pond at golden hour">
+            <img src="grad photos/ant.jpg" alt="Graduate beaming in cap and gown with dreamy bokeh lights at night">
             <img src="pro headshots/DSCF4322.jpg" alt="Professional headshot of a young man in a blue plaid suit">
             <img src="pro headshots/DSCF7556.jpg" alt="Professional headshot with black suit and tie against a white backdrop">
-            <img src="grad photos/DSCF2707.jpg" alt="Two friends playfully twirling together in a garden">
-            <img src="grad photos/DSCF2734.jpg" alt="Young woman posing gracefully in a garden by stone steps">
+            <img src="fun group session/DSCF2707.jpg" alt="Two friends playfully twirling together in a garden">
+            <img src="fun group session/DSCF2734.jpg" alt="Young woman posing gracefully in a garden by stone steps">
         </div>
     </div>
 </div>
@@ -1386,6 +1476,19 @@
     </div>
 </div>
 
+<!-- Photo Detail View -->
+<div class="photo-detail-overlay" id="photoDetail" onclick="if(event.target===this)closeDetail()">
+    <div class="photo-detail">
+        <img src="" alt="" id="detailImg">
+        <div class="photo-detail-info">
+            <button class="detail-close" onclick="closeDetail()">&times;</button>
+            <div class="detail-num" id="detailNum"></div>
+            <h3 id="detailName"></h3>
+            <p class="detail-story" id="detailStory"></p>
+        </div>
+    </div>
+</div>
+
 <!-- Lightbox -->
 <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
     <img src="" alt="Full size photo" id="lightboxImg">
@@ -1408,43 +1511,117 @@
 </footer>
 
 <script>
-// ===== PRINT PHOTOS DATA =====
+// ==========================================================================
+// PRINT PHOTOS DATA
+// To update a story: find the photo by number and edit the "story" field.
+// Each story is the text that appears when a visitor clicks on the photo.
+// ==========================================================================
 const printPhotos = [
-    { file: "fun photos-fo prints/DSCF0059.jpg", num: 1, name: "Mountain Twilight", alt: "Purple and pink sunset behind mountain silhouettes" },
-    { file: "fun photos-fo prints/DSCF0147.jpg", num: 2, name: "Snowy Peaks & Tundra", alt: "Snow-dusted mountain range with overcast skies above brown tundra" },
-    { file: "fun photos-fo prints/DSCF0213.jpg", num: 3, name: "Alpine Panorama", alt: "Expansive snow-capped alpine mountain range under blue sky" },
-    { file: "fun photos-fo prints/DSCF0249.jpg", num: 4, name: "Winter Mountain Range", alt: "Snow-covered peaks stretching across a cloudy winter sky" },
-    { file: "fun photos-fo prints/DSCF0255.jpg", num: 5, name: "Sunlit Summit", alt: "A towering mountain peak bathed in golden light with clouds swirling around" },
-    { file: "fun photos-fo prints/DSCF0275.jpg", num: 6, name: "Alpine Village Stream", alt: "A stream running through a snow-covered European village with mountains behind" },
-    { file: "fun photos-fo prints/DSCF0386.jpg", num: 7, name: "Snowy Treeline", alt: "Pine-covered hillside dusted with snow beneath a mountain backdrop" },
-    { file: "fun photos-fo prints/DSCF0494.jpg", num: 8, name: "Greenhouse Dreams", alt: "Lush green plants inside a misty greenhouse with light pouring through" },
-    { file: "fun photos-fo prints/DSCF0578.jpg", num: 9, name: "Monochrome Mountains", alt: "Black and white panoramic view of layered mountain ridges under stormy clouds" },
-    { file: "fun photos-fo prints/DSCF0596.jpg", num: 10, name: "Harbor Flags", alt: "Colorful flags waving at a sunlit seaside harbor with boats in the distance" },
-    { file: "fun photos-fo prints/DSCF1345.jpg", num: 11, name: "Pacific Coast Dusk", alt: "Waves breaking along a wide sandy beach at dusk with misty hills" },
-    { file: "fun photos-fo prints/DSCF1553.jpg", num: 12, name: "Sunset Soarer", alt: "A bird in flight over layered purple and pink mountain ridges at sunset" },
-    { file: "fun photos-fo prints/DSCF1892.jpg", num: 13, name: "Emerald Coastline", alt: "Turquoise waves crashing on a misty shore with orange wildflowers in the foreground" },
-    { file: "fun photos-fo prints/DSCF1933.jpg", num: 14, name: "Wildflower Cove", alt: "Purple wildflowers blooming on a clifftop overlooking a wide sandy beach" },
-    { file: "fun photos-fo prints/DSCF2541-Pano.jpg", num: 15, name: "God Rays", alt: "Dramatic golden sunbeams breaking through dark storm clouds over the mountains" },
-    { file: "fun photos-fo prints/DSCF2690.jpg", num: 16, name: "Golden Peak", alt: "Snow-capped mountain peak glowing with golden sunset light above a valley" },
-    { file: "fun photos-fo prints/DSCF2960-2.jpg", num: 17, name: "Storm Brewing", alt: "Towering blue storm clouds gathering above a treeline at dusk" },
-    { file: "fun photos-fo prints/DSCF2961.jpg", num: 18, name: "Starry Night Trail", alt: "Night sky with stars and a red light trail streaking above dark trees" },
-    { file: "fun photos-fo prints/DSCF3167-1.jpg", num: 19, name: "Bicycle Under the Oaks", alt: "A bicycle leaning against a large oak tree in a sunlit summer park" },
-    { file: "fun photos-fo prints/DSCF3330.jpg", num: 20, name: "Dune Trekkers", alt: "Hikers with backpacks trekking across Great Sand Dunes with mountains in the background" },
-    { file: "fun photos-fo prints/DSCF3383.jpg", num: 21, name: "Sand Dune Celebration", alt: "Two friends with arms wide open posing atop the Great Sand Dunes" },
-    { file: "fun photos-fo prints/DSCF3461.jpg", num: 22, name: "Lone Dune Walker", alt: "A solo figure walking into the golden sand dunes at sunset" },
-    { file: "fun photos-fo prints/DSCF3564.jpg", num: 23, name: "Climbing the Dunes", alt: "Three hikers climbing a towering sand dune leaving footprint trails" },
-    { file: "fun photos-fo prints/DSCF3845.jpg", num: 24, name: "Creekside Adventure", alt: "Off-road vehicle parked by a mountain creek on a sunny summer day" },
-    { file: "fun photos-fo prints/DSCF3861.jpg", num: 25, name: "Starlit Peak", alt: "A mountain peak glowing under a star-filled sky with wispy clouds" },
-    { file: "fun photos-fo prints/DSCF4032.jpg", num: 26, name: "Aspen Grove", alt: "A lush grove of white-barked aspen trees bathed in vibrant green summer light" },
-    { file: "fun photos-fo prints/DSCF4571.jpg", num: 27, name: "Riverside Canoes", alt: "Red and white canoes resting in the grass by a calm river" },
-    { file: "fun photos-fo prints/DSCF4676.jpg", num: 28, name: "Pastel Sunset Shore", alt: "Soft pink and peach sunset over ocean waves breaking on a sandy beach" },
-    { file: "fun photos-fo prints/DSCF5304.jpg", num: 29, name: "Clifftop Cove", alt: "Turquoise ocean waves curving along sandy cliffs viewed from above" },
-    { file: "fun photos-fo prints/DSCF5638.jpg", num: 30, name: "Dune Beach Gateway", alt: "A bright sandy beach seen through a gap in golden dune grass" },
-    { file: "fun photos-fo prints/DSCF5904.jpg", num: 31, name: "Mountain Through the Pines", alt: "A rocky mountain peak framed by tall pine trees on a clear day" },
-    { file: "fun photos-fo prints/DSCF6112.jpg", num: 32, name: "Alpine Valley Vista", alt: "Aerial view of a lush green alpine valley with a village and winding road" },
-    { file: "fun photos-fo prints/DSCF6888.jpg", num: 33, name: "Italian Harbor", alt: "Colorful buildings and boats in a turquoise Italian harbor with mountains behind" },
-    { file: "fun photos-fo prints/DSCF9550.jpg", num: 34, name: "Hillside Pup", alt: "A small dog resting in green grass on a misty hillside park" },
-    { file: "fun photos-fo prints/DSCF9814.jpg", num: 35, name: "Fire Spinner", alt: "Explosive steel wool fire spinning with sparks flying against a black night sky" },
+    // --- PHOTO #1 ---
+    { file: "fun photos-fo prints/DSCF0059.jpg", num: 1, name: "Mountain Twilight", alt: "Purple and pink sunset behind mountain silhouettes",
+      story: "Caught this sunset while hiking in the mountains. The sky shifted from deep blue to pink in just a few minutes -- had to shoot fast before it was gone." },
+    // --- PHOTO #2 ---
+    { file: "fun photos-fo prints/DSCF0147.jpg", num: 2, name: "Snowy Peaks & Tundra", alt: "Snow-dusted mountain range with overcast skies above brown tundra",
+      story: "An overcast day in the high country. The muted tones and low clouds gave everything a moody, quiet feeling that I loved." },
+    // --- PHOTO #3 ---
+    { file: "fun photos-fo prints/DSCF0213.jpg", num: 3, name: "Alpine Panorama", alt: "Expansive snow-capped alpine mountain range under blue sky",
+      story: "Taken from a ridgeline trail in the Alps. The snow-covered peaks seemed to stretch on forever in every direction." },
+    // --- PHOTO #4 ---
+    { file: "fun photos-fo prints/DSCF0249.jpg", num: 4, name: "Winter Mountain Range", alt: "Snow-covered peaks stretching across a cloudy winter sky",
+      story: "A cold, windy day high above the treeline. The snow and clouds blended together in a way that made the mountains feel endless." },
+    // --- PHOTO #5 ---
+    { file: "fun photos-fo prints/DSCF0255.jpg", num: 5, name: "Sunlit Summit", alt: "A towering mountain peak bathed in golden light with clouds swirling around",
+      story: "Watched the clouds part just long enough for the sun to hit this peak. One of those right-place-right-time moments." },
+    // --- PHOTO #6 ---
+    { file: "fun photos-fo prints/DSCF0275.jpg", num: 6, name: "Alpine Village Stream", alt: "A stream running through a snow-covered European village with mountains behind",
+      story: "A charming mountain village tucked into the Alps. The stream running through town with snow-covered rooftops made it feel like a postcard." },
+    // --- PHOTO #7 ---
+    { file: "fun photos-fo prints/DSCF0386.jpg", num: 7, name: "Snowy Treeline", alt: "Pine-covered hillside dusted with snow beneath a mountain backdrop",
+      story: "Fresh snowfall on the pines with the mountains peeking through the clouds behind. Simple and peaceful." },
+    // --- PHOTO #8 ---
+    { file: "fun photos-fo prints/DSCF0494.jpg", num: 8, name: "Greenhouse Dreams", alt: "Lush green plants inside a misty greenhouse with light pouring through",
+      story: "Stepped inside this greenhouse and it felt like another world. The humidity created this soft, dreamy green glow everywhere." },
+    // --- PHOTO #9 ---
+    { file: "fun photos-fo prints/DSCF0578.jpg", num: 9, name: "Monochrome Mountains", alt: "Black and white panoramic view of layered mountain ridges under stormy clouds",
+      story: "Converted this to black and white to emphasize the layers of ridges fading into the distance. The storm clouds added the drama." },
+    // --- PHOTO #10 ---
+    { file: "fun photos-fo prints/DSCF0596.jpg", num: 10, name: "Harbor Flags", alt: "Colorful flags waving at a sunlit seaside harbor with boats in the distance",
+      story: "Golden hour at a small seaside harbor. The flags were catching the light and the whole scene just felt warm and inviting." },
+    // --- PHOTO #11 ---
+    { file: "fun photos-fo prints/DSCF1345.jpg", num: 11, name: "Pacific Coast Dusk", alt: "Waves breaking along a wide sandy beach at dusk with misty hills",
+      story: "An evening walk along the Pacific coast. The mist rolling in off the water gave the whole beach a soft, blue atmosphere." },
+    // --- PHOTO #12 ---
+    { file: "fun photos-fo prints/DSCF1553.jpg", num: 12, name: "Sunset Soarer", alt: "A bird in flight over layered purple and pink mountain ridges at sunset",
+      story: "Spotted this bird gliding over the ridgeline right as the sunset turned everything purple and pink. Couldn't have timed it better." },
+    // --- PHOTO #13 ---
+    { file: "fun photos-fo prints/DSCF1892.jpg", num: 13, name: "Emerald Coastline", alt: "Turquoise waves crashing on a misty shore with orange wildflowers in the foreground",
+      story: "The contrast between the emerald water and the orange wildflowers on the cliff was incredible. Nature's own color palette." },
+    // --- PHOTO #14 ---
+    { file: "fun photos-fo prints/DSCF1933.jpg", num: 14, name: "Wildflower Cove", alt: "Purple wildflowers blooming on a clifftop overlooking a wide sandy beach",
+      story: "Purple ice plant blanketing the clifftop with the beach stretching out below. California's coastline never disappoints." },
+    // --- PHOTO #15 ---
+    { file: "fun photos-fo prints/DSCF2541-Pano.jpg", num: 15, name: "God Rays", alt: "Dramatic golden sunbeams breaking through dark storm clouds over the mountains",
+      story: "These sunbeams broke through right before a storm rolled in. The contrast between the golden light and dark clouds was unreal." },
+    // --- PHOTO #16 ---
+    { file: "fun photos-fo prints/DSCF2690.jpg", num: 16, name: "Golden Peak", alt: "Snow-capped mountain peak glowing with golden sunset light above a valley",
+      story: "Last light of the day hitting just the tip of this peak. Everything below was already in shadow -- the mountain was glowing." },
+    // --- PHOTO #17 ---
+    { file: "fun photos-fo prints/DSCF2960-2.jpg", num: 17, name: "Storm Brewing", alt: "Towering blue storm clouds gathering above a treeline at dusk",
+      story: "Watched these massive storm clouds build up over the course of an hour. The deep blue tones right before they let loose were electric." },
+    // --- PHOTO #18 ---
+    { file: "fun photos-fo prints/DSCF2961.jpg", num: 18, name: "Starry Night Trail", alt: "Night sky with stars and a red light trail streaking above dark trees",
+      story: "Long exposure on a clear night. That red streak is a plane cutting through the star field -- an unexpected addition that made the shot." },
+    // --- PHOTO #19 ---
+    { file: "fun photos-fo prints/DSCF3167-1.jpg", num: 19, name: "Bicycle Under the Oaks", alt: "A bicycle leaning against a large oak tree in a sunlit summer park",
+      story: "Found this bike leaning against an oak tree with the sun filtering through the leaves. Felt like a scene out of a movie." },
+    // --- PHOTO #20 ---
+    { file: "fun photos-fo prints/DSCF3330.jpg", num: 20, name: "Dune Trekkers", alt: "Hikers with backpacks trekking across Great Sand Dunes with mountains in the background",
+      story: "Backpacking across the Great Sand Dunes in Colorado. The scale of these dunes against the mountains behind is hard to capture -- but this comes close." },
+    // --- PHOTO #21 ---
+    { file: "fun photos-fo prints/DSCF3383.jpg", num: 21, name: "Sand Dune Celebration", alt: "Two friends with arms wide open posing atop the Great Sand Dunes",
+      story: "Made it to the top of the dunes and had to celebrate. The wind was wild but the views were worth every step." },
+    // --- PHOTO #22 ---
+    { file: "fun photos-fo prints/DSCF3461.jpg", num: 22, name: "Lone Dune Walker", alt: "A solo figure walking into the golden sand dunes at sunset",
+      story: "Sunset turned the dunes golden and this lone hiker walking into the light made for a perfect silhouette moment." },
+    // --- PHOTO #23 ---
+    { file: "fun photos-fo prints/DSCF3564.jpg", num: 23, name: "Climbing the Dunes", alt: "Three hikers climbing a towering sand dune leaving footprint trails",
+      story: "Three of us making our way up a massive dune. The footprint trails tell the whole story of the climb." },
+    // --- PHOTO #24 ---
+    { file: "fun photos-fo prints/DSCF3845.jpg", num: 24, name: "Creekside Adventure", alt: "Off-road vehicle parked by a mountain creek on a sunny summer day",
+      story: "Pulled off the road to explore a mountain creek. The water was crystal clear and the mountains were right there." },
+    // --- PHOTO #25 ---
+    { file: "fun photos-fo prints/DSCF3861.jpg", num: 25, name: "Starlit Peak", alt: "A mountain peak glowing under a star-filled sky with wispy clouds",
+      story: "Stayed up late to photograph this peak under the stars. The clouds drifting past added movement to an otherwise still night." },
+    // --- PHOTO #26 ---
+    { file: "fun photos-fo prints/DSCF4032.jpg", num: 26, name: "Aspen Grove", alt: "A lush grove of white-barked aspen trees bathed in vibrant green summer light",
+      story: "Walked into this aspen grove and the green light filtering through was almost surreal. One of my favorite summer shots." },
+    // --- PHOTO #27 ---
+    { file: "fun photos-fo prints/DSCF4571.jpg", num: 27, name: "Riverside Canoes", alt: "Red and white canoes resting in the grass by a calm river",
+      story: "These canoes sitting by the river in the tall grass caught my eye. Something about the colors and the quiet scene felt nostalgic." },
+    // --- PHOTO #28 ---
+    { file: "fun photos-fo prints/DSCF4676.jpg", num: 28, name: "Pastel Sunset Shore", alt: "Soft pink and peach sunset over ocean waves breaking on a sandy beach",
+      story: "One of those pastel sunsets where the sky and ocean melt into the same soft palette. Stood there until the last bit of color faded." },
+    // --- PHOTO #29 ---
+    { file: "fun photos-fo prints/DSCF5304.jpg", num: 29, name: "Clifftop Cove", alt: "Turquoise ocean waves curving along sandy cliffs viewed from above",
+      story: "Shot from high up on a cliff looking down at the waves curving along the shore. The turquoise water against the sand was stunning." },
+    // --- PHOTO #30 ---
+    { file: "fun photos-fo prints/DSCF5638.jpg", num: 30, name: "Dune Beach Gateway", alt: "A bright sandy beach seen through a gap in golden dune grass",
+      story: "Peeking through the dune grass to the open beach beyond. Loved how the grass frames the bright blue sky and white sand." },
+    // --- PHOTO #31 ---
+    { file: "fun photos-fo prints/DSCF5904.jpg", num: 31, name: "Mountain Through the Pines", alt: "A rocky mountain peak framed by tall pine trees on a clear day",
+      story: "The pine trees naturally framed this mountain peak on a perfectly clear day. Sometimes the simplest compositions work best." },
+    // --- PHOTO #32 ---
+    { file: "fun photos-fo prints/DSCF6112.jpg", num: 32, name: "Alpine Valley Vista", alt: "Aerial view of a lush green alpine valley with a village and winding road",
+      story: "Looking down into a green alpine valley from high above. The tiny village and winding road gave a sense of just how vast this landscape is." },
+    // --- PHOTO #33 ---
+    { file: "fun photos-fo prints/DSCF6888.jpg", num: 33, name: "Italian Harbor", alt: "Colorful buildings and boats in a turquoise Italian harbor with mountains behind",
+      story: "The colors of this Italian harbor blew me away -- turquoise water, pastel buildings, and mountains in the background. Doesn't feel real." },
+    // --- PHOTO #34 ---
+    { file: "fun photos-fo prints/DSCF9550.jpg", num: 34, name: "Hillside Pup", alt: "A small dog resting in green grass on a misty hillside park",
+      story: "This little dog was just hanging out on a hillside park, watching the world go by. Had to capture the vibe." },
+    // --- PHOTO #35 ---
+    { file: "fun photos-fo prints/DSCF9814.jpg", num: 35, name: "Fire Spinner", alt: "Explosive steel wool fire spinning with sparks flying against a black night sky",
+      story: "Steel wool fire spinning at night. The sparks flying everywhere made for an explosive long-exposure shot." },
 ];
 
 // ===== PAGE NAVIGATION =====
@@ -1507,18 +1684,37 @@ function showToast(msg) {
 function populatePrints() {
     const gallery = document.getElementById('printsGallery');
     gallery.innerHTML = '';
-    printPhotos.forEach(photo => {
+    printPhotos.forEach((photo, index) => {
         const card = document.createElement('div');
         card.className = 'print-card';
+        card.style.cursor = 'pointer';
         card.innerHTML = `
-            <img src="${photo.file}" alt="${photo.alt}" loading="lazy" onclick="openLightbox('${photo.file}', '${photo.alt}')">
+            <img src="${photo.file}" alt="${photo.alt}" loading="lazy">
             <div class="print-label">
                 <span>#${photo.num} - ${photo.name}</span>
                 <span class="print-num">${photo.num}</span>
             </div>
         `;
+        card.onclick = () => openDetail(index);
         gallery.appendChild(card);
     });
+}
+
+// ===== PHOTO DETAIL VIEW =====
+function openDetail(index) {
+    const photo = printPhotos[index];
+    document.getElementById('detailImg').src = photo.file;
+    document.getElementById('detailImg').alt = photo.alt;
+    document.getElementById('detailNum').textContent = 'Photo #' + photo.num;
+    document.getElementById('detailName').textContent = photo.name;
+    document.getElementById('detailStory').textContent = photo.story;
+    document.getElementById('photoDetail').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+    document.getElementById('photoDetail').classList.remove('show');
+    document.body.style.overflow = '';
 }
 
 // ===== POPULATE WAITLIST FAVORITES GRID =====

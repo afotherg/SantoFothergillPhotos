@@ -661,14 +661,31 @@
 
         .service-photos img {
             width: 100%;
-            height: 200px;
+            height: 182px;
             object-fit: cover;
-            object-position: center 20%;
+            object-position: center 30%;
         }
 
         .service-photos img:first-child {
             grid-column: 1 / -1;
-            height: 250px;
+            height: 228px;
+        }
+		
+        .service-card:nth-child(4) {
+            align-items: center;
+        }
+
+        .service-card:nth-child(4) .service-photos {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto auto;
+        }
+
+        .service-card:nth-child(4) .service-photos img {
+            height: 240px;
+        }
+
+        .service-card:nth-child(4) .service-photos img:first-child {
+            grid-column: auto;
         }
 
         .service-info {
@@ -1227,9 +1244,9 @@
         <!-- Graduation Photos -->
         <div class="service-card">
             <div class="service-photos">
-                <img src="grad photos/jumping for joy.jpg" alt="Two graduates jumping for joy by a campus pond at golden hour">
-                <img src="grad photos/patchie.jpg" alt="Graduate smiling in cap and gown with gold tassel by the campus lake">
-                <img src="grad photos/ant.jpg" alt="Graduate beaming in cap and gown with dreamy bokeh lights at night">
+                <img src="grad photos/jumping for joy.jpg" alt="Two graduates jumping for joy by a campus pond at golden hour" style="object-position: center 1%;">
+                <img src="grad photos/patchie.jpg" alt="Graduate smiling in cap and gown with gold tassel by the campus lake" style="object-position: center 50%;">
+                <img src="grad photos/ant.jpg" alt="Graduate beaming in cap and gown with dreamy bokeh lights at night" style="object-position: center 35%;">
             </div>
             <div class="service-info">
                 <h2>Graduation Photos</h2>
@@ -1243,8 +1260,8 @@
         <!-- Fun Group Sessions -->
         <div class="service-card">
             <div class="service-photos">
-                <img src="fun group session/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park">
-                <img src="fun group session/Izzy 2.jpg" alt="Izzy smiling in front of pink roses in an autumn garden" style="object-position: center 20%;">
+                <img src="fun group session/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park" style="object-position: center 75%;">
+                <img src="fun group session/Izzy 2.jpg" alt="Izzy smiling in front of pink roses in an autumn garden" style="object-position: center 100%;">
                 <img src="fun group session/emil kels.jpg" alt="Two friends hugging and laughing together on stone steps in a rose garden">
             </div>
             <div class="service-info">
@@ -1260,8 +1277,8 @@
         <div class="service-card">
             <div class="service-photos">
                 <img src="pro headshots/DSCF4332.jpg" alt="Professional headshot of a young man in a blue suit smiling warmly">
-                <img src="pro headshots/DSCF4338.jpg" alt="Professional headshot of a man in a dark blazer by a brick archway">
-                <img src="pro headshots/will headshot.jpg" alt="Professional headshot of Will">
+                <img src="pro headshots/DSCF4338.jpg" alt="Professional headshot of a man in a dark blazer by a brick archway" style="object-position: center 50%;">
+                <img src="pro headshots/will headshot.jpg" alt="Professional headshot of Will" style="object-position: center 50%;">
             </div>
             <div class="service-info">
                 <h2>Professional Headshots</h2>
@@ -1275,9 +1292,9 @@
         <!-- Engagement Photos -->
         <div class="service-card">
             <div class="service-photos">
-                <img src="Suprise Engagments Photos/DSCF6353.jpg" alt="Woman reacting with tears of joy during surprise mountain proposal">
-                <img src="Suprise Engagments Photos/DSCF6597.jpg" alt="Engagement ring sparkling with snowy mountains in the background">
-                <img src="Suprise Engagments Photos/DSCF6679.jpg" alt="Newly engaged couple embracing at a mountain overlook with stunning views">
+                <img src="Suprise Engagments Photos/top.jpg" alt="Surprise engagement reaction at mountain overlook">
+                <img src="Suprise Engagments Photos/middle.jpg" alt="Newly engaged couple embracing with mountain views"style="object-position: center 90%;">
+                <img src="Suprise Engagments Photos/Bottom.jpg" alt="Engagement couple portrait at scenic overlook"style="object-position: center 90%;">
             </div>
             <div class="service-info">
                 <h2>Engagement Photos</h2>
@@ -1297,8 +1314,9 @@
             <img src="fun group session/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park">
             <img src="fun group session/DSCF2323.jpg" alt="Group of friends laughing together in autumn park setting">
             <img src="Suprise Engagments Photos/DSCF6629.jpg" alt="Engaged couple walking hand-in-hand on a forest path">
+            <img src="Suprise Engagments Photos/Engagemt photo with ring in it.jpg" alt="Engagement ring with snowy mountains in the background">
             <img src="fun group session/emily solo photo.jpg" alt="Emily posing by pink roses in an autumn garden">
-            <img src="Suprise Engagments Photos/DSCF6684.jpg" alt="Couple embracing at a stone wall overlook with mountain views">
+            <img src="Suprise Engagments Photos/Bottom.jpg" alt="Couple embracing at a stone wall overlook with mountain views">
             <img src="fun group session/DSCF3971.jpg" alt="Graduate twirling in a pink dress between tall stone columns">
             <img src="grad photos/jumping for joy.jpg" alt="Two graduates jumping for joy by a campus pond at golden hour">
             <img src="grad photos/ant.jpg" alt="Graduate beaming in cap and gown with dreamy bokeh lights at night">
@@ -1306,12 +1324,14 @@
             <img src="pro headshots/DSCF7556.jpg" alt="Professional headshot with black suit and tie against a white backdrop">
             <img src="fun group session/DSCF2707.jpg" alt="Two friends playfully twirling together in a garden">
             <img src="fun group session/DSCF2734.jpg" alt="Young woman posing gracefully in a garden by stone steps">
+			<img src="fun group session/Izzy.jpg" alt="Super Pretty Girl, standig in a park with rose bushes nearby">
             <!-- Duplicate -->
             <img src="fun group session/DSCF2270.jpg" alt="Group of friends in dresses walking hand-in-hand through a park">
             <img src="fun group session/DSCF2323.jpg" alt="Group of friends laughing together in autumn park setting">
             <img src="Suprise Engagments Photos/DSCF6629.jpg" alt="Engaged couple walking hand-in-hand on a forest path">
+            <img src="Suprise Engagments Photos/Engagemt photo with ring in it.jpg" alt="Engagement ring with snowy mountains in the background">
             <img src="fun group session/emily solo photo.jpg" alt="Emily posing by pink roses in an autumn garden">
-            <img src="Suprise Engagments Photos/DSCF6684.jpg" alt="Couple embracing at a stone wall overlook with mountain views">
+            <img src="Suprise Engagments Photos/Bottom.jpg" alt="Couple embracing at a stone wall overlook with mountain views">
             <img src="fun group session/DSCF3971.jpg" alt="Graduate twirling in a pink dress between tall stone columns">
             <img src="grad photos/jumping for joy.jpg" alt="Two graduates jumping for joy by a campus pond at golden hour">
             <img src="grad photos/ant.jpg" alt="Graduate beaming in cap and gown with dreamy bokeh lights at night">

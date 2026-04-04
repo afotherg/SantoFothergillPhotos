@@ -4,7 +4,13 @@
       "Bash(sed -n '1510,1920p' index.html)",
       "Bash(node -e ':*)",
       "Bash(sed:*)",
-      "Bash(sed -i \"s/\\\\xe2\\\\x80\\\\x9c/\\\\\"/g; s/\\\\xe2\\\\x80\\\\x9d/\\\\\"/g; s/\\\\xe2\\\\x80\\\\x98/'/g; s/\\\\xe2\\\\x80\\\\x99/'/g\" index.html)"
+      "Bash(sed -i \"s/\\\\xe2\\\\x80\\\\x9c/\\\\\"/g; s/\\\\xe2\\\\x80\\\\x9d/\\\\\"/g; s/\\\\xe2\\\\x80\\\\x98/'/g; s/\\\\xe2\\\\x80\\\\x99/'/g\" index.html)",
+      "Bash(xargs du:*)",
+      "Bash(xargs ls:*)",
+      "Bash(find . \\\\\\( -name \"*.jpg\" -o -name \"*.JPG\" -o -name \"*.jpeg\" -o -name \"*.png\" \\\\\\) -exec ls -lS {} +)",
+      "Bash(find . \\\\\\( -name \"*.jpg\" -o -name \"*.JPG\" -o -name \"*.jpeg\" -o -name \"*.png\" \\\\\\) -exec ls -l {} +)",
+      "Bash(pip show:*)",
+      "Bash(python compress_images.py)"
     ]
   }
 }

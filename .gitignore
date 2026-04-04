@@ -1,0 +1,5 @@
+# Original full-resolution photos (backed up locally, too large for git)
+originals_backup/
+
+# Compression script (not needed on the site)
+compress_images.py

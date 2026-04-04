@@ -815,6 +815,13 @@
             border-color: var(--accent);
         }
 
+        .time-slot.unavailable {
+            opacity: 0.35;
+            text-decoration: line-through;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
         /* ===== FOOTER ===== */
         footer {
             background: var(--text-dark);
@@ -1466,17 +1473,7 @@
                 </div>
                 <div class="form-group">
                     <label>Pick a Time</label>
-                    <div class="time-slots" id="timeSlots">
-                        <div class="time-slot" onclick="selectTime(this, '9:00 AM')">9:00 AM</div>
-                        <div class="time-slot" onclick="selectTime(this, '10:00 AM')">10:00 AM</div>
-                        <div class="time-slot" onclick="selectTime(this, '11:00 AM')">11:00 AM</div>
-                        <div class="time-slot" onclick="selectTime(this, '12:00 PM')">12:00 PM</div>
-                        <div class="time-slot" onclick="selectTime(this, '1:00 PM')">1:00 PM</div>
-                        <div class="time-slot" onclick="selectTime(this, '2:00 PM')">2:00 PM</div>
-                        <div class="time-slot" onclick="selectTime(this, '3:00 PM')">3:00 PM</div>
-                        <div class="time-slot" onclick="selectTime(this, '4:00 PM')">4:00 PM</div>
-                        <div class="time-slot" onclick="selectTime(this, '5:00 PM')">5:00 PM</div>
-                    </div>
+                    <div class="time-slots" id="timeSlots"></div>
                     <input type="hidden" id="bookTime" name="time" required>
                 </div>
                 <div class="form-group">
@@ -1762,12 +1759,61 @@ document.addEventListener('click', function(e) {
 });
 
 // ===== CALENDAR =====
+// =====================================================================
+// AVAILABILITY CONFIG — Edit this to block out dates and times
+// =====================================================================
+//
+// 1) Block an ENTIRE DAY (unavailable all day):
+//    Add the date string "YYYY-MM-DD" to blockedDates
+//
+// 2) Block SPECIFIC TIME SLOTS on a date:
+//    Add an entry to blockedTimeSlots like "YYYY-MM-DD": ["9:00 AM", "2:00 PM"]
+//    Those times will be greyed out; other times stay available
+//
+// 3) Block a RANGE of dates:
+//    Add { from: "YYYY-MM-DD", to: "YYYY-MM-DD" } to blockedRanges
+//
+// 4) Block recurring DAYS OF THE WEEK (0=Sun, 1=Mon, ... 6=Sat):
+//    Add day numbers to blockedWeekdays, e.g. [0, 6] blocks weekends
+//
+const blockedDates = [
+    // "2026-04-10",
+    // "2026-04-15",
+];
+
+const blockedTimeSlots = {
+    // "2026-04-12": ["9:00 AM", "10:00 AM"],
+    // "2026-04-20": ["3:00 PM", "4:00 PM", "5:00 PM"],
+};
+
+const blockedRanges = [
+    // { from: "2026-04-18", to: "2026-04-22" },
+];
+
+const blockedWeekdays = [
+    // 0,  // Sunday
+    // 6,  // Saturday
+];
+// =====================================================================
+
+function isDateBlocked(dateStr) {
+    if (blockedDates.includes(dateStr)) return true;
+    const d = new Date(dateStr + 'T00:00:00');
+    if (blockedWeekdays.includes(d.getDay())) return true;
+    for (const range of blockedRanges) {
+        if (dateStr >= range.from && dateStr <= range.to) return true;
+    }
+    return false;
+}
+
+function isTimeBlocked(dateStr, time) {
+    if (!blockedTimeSlots[dateStr]) return false;
+    return blockedTimeSlots[dateStr].includes(time);
+}
+
 let calendarDate = new Date();
 let selectedDate = null;
 let selectedTime = null;
-
-// For now, all future dates are available. You can later add unavailable dates here.
-const unavailableDates = []; // e.g., ["2026-04-10", "2026-04-15"]
 
 function renderCalendar() {
     const grid = document.getElementById('calendarGrid');
@@ -1804,7 +1850,7 @@ function renderCalendar() {
         const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
         const dateObj = new Date(year, month, d);
 
-        if (dateObj < today || unavailableDates.includes(dateStr)) {
+        if (dateObj < today || isDateBlocked(dateStr)) {
             el.classList.add('unavailable');
         } else {
             el.onclick = () => selectDate(el, dateStr);
@@ -1820,13 +1866,34 @@ function renderCalendar() {
 
 function selectDate(el, dateStr) {
     selectedDate = dateStr;
+    selectedTime = null;
     document.getElementById('bookDate').value = dateStr;
+    document.getElementById('bookTime').value = '';
     renderCalendar();
+    renderTimeSlots();
 }
 
 function changeMonth(dir) {
     calendarDate.setMonth(calendarDate.getMonth() + dir);
     renderCalendar();
+}
+
+function renderTimeSlots() {
+    const container = document.getElementById('timeSlots');
+    const allTimes = ['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM'];
+    container.innerHTML = '';
+    allTimes.forEach(time => {
+        const el = document.createElement('div');
+        el.className = 'time-slot';
+        el.textContent = time;
+        if (selectedDate && isTimeBlocked(selectedDate, time)) {
+            el.classList.add('unavailable');
+        } else {
+            el.onclick = () => selectTime(el, time);
+        }
+        if (selectedTime === time) el.classList.add('selected');
+        container.appendChild(el);
+    });
 }
 
 function selectTime(el, time) {
@@ -1931,6 +1998,7 @@ function submitBooking(e) {
 populatePrints();
 populateFavGrid();
 renderCalendar();
+renderTimeSlots();
 </script>
 
 </body>

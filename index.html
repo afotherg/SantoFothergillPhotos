@@ -555,6 +555,40 @@
             gap: 1.5rem;
         }
 
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--accent);
+            background: white;
+            color: var(--accent);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .pagination button:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .pagination button.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
         .print-card {
             position: relative;
             border-radius: 16px;
@@ -1020,10 +1054,11 @@
 
         .photo-detail img {
             width: 100%;
-            height: 100%;
-            min-height: 400px;
-            object-fit: cover;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
             border-radius: 20px 0 0 20px;
+            background: #f0f0f0;
         }
 
         .photo-detail-info {
@@ -1075,7 +1110,7 @@
             }
 
             .photo-detail img {
-                min-height: 250px;
+                min-height: auto;
                 border-radius: 20px 20px 0 0;
             }
         }
@@ -1129,7 +1164,6 @@
             <img src="fun photos-fo prints/DSCF1933.jpg" alt="Coastal wildflowers overlooking the beach">
             <img src="fun photos-fo prints/DSCF0213.jpg" alt="Snow-capped alpine mountain range">
             <img src="fun photos-fo prints/DSCF3461.jpg" alt="Solo hiker walking across sand dunes at sunset">
-            <img src="fun photos-fo prints/DSCF6888.jpg" alt="Colorful boats in an Italian harbor">
             <img src="Photos of me/DSCF5742.jpg" alt="Santo laughing on a mountain trail at golden hour">
             <img src="fun photos-fo prints/DSCF4676.jpg" alt="Pink sunset over the ocean shoreline">
             <img src="Photos of me/14.jpg" alt="Santo and a friend posing at the summit of Mount Fuji above the clouds">
@@ -1156,7 +1190,6 @@
             <img loading="lazy" src="fun photos-fo prints/DSCF0275.jpg" alt="Snow-covered alpine village with a stream running through">
             <img loading="lazy" src="fun photos-fo prints/DSCF3330.jpg" alt="Hikers trekking across Great Sand Dunes with mountain backdrop">
             <img loading="lazy" src="fun photos-fo prints/DSCF0578.jpg" alt="Black and white mountain range with stormy clouds">
-            <img loading="lazy" src="fun photos-fo prints/DSCF6888.jpg" alt="Colorful boats in an Italian harbor with turquoise water">
             <img loading="lazy" src="fun photos-fo prints/DSCF4032.jpg" alt="Lush green aspen grove in summer sunlight">
             <img loading="lazy" src="Photos of me/DSCF6887.jpg" alt="Santo scaling a rocky mountain peak with a blue sky above">
             <img loading="lazy" src="fun photos-fo prints/DSCF1892.jpg" alt="Emerald waves crashing on a misty coastline with wildflowers">
@@ -1171,7 +1204,6 @@
             <img loading="lazy" src="fun photos-fo prints/DSCF0275.jpg" alt="Snow-covered alpine village with a stream running through">
             <img loading="lazy" src="fun photos-fo prints/DSCF3330.jpg" alt="Hikers trekking across Great Sand Dunes with mountain backdrop">
             <img loading="lazy" src="fun photos-fo prints/DSCF0578.jpg" alt="Black and white mountain range with stormy clouds">
-            <img loading="lazy" src="fun photos-fo prints/DSCF6888.jpg" alt="Colorful boats in an Italian harbor with turquoise water">
             <img loading="lazy" src="fun photos-fo prints/DSCF4032.jpg" alt="Lush green aspen grove in summer sunlight">
             <img loading="lazy" src="Photos of me/DSCF6887.jpg" alt="Santo scaling a rocky mountain peak with a blue sky above">
             <img loading="lazy" src="fun photos-fo prints/DSCF1892.jpg" alt="Emerald waves crashing on a misty coastline with wildflowers">
@@ -1220,7 +1252,6 @@
             <img loading="lazy" src="Photos of me/DSCF5169.jpg" alt="Santo posing in front of a traditional Japanese torii gate in Miyajima">
             <img loading="lazy" src="fun photos-fo prints/DSCF9550.jpg" alt="Small dog resting in a green hillside park">
             <img loading="lazy" src="fun photos-fo prints/DSCF6112.jpg" alt="Aerial view of an alpine valley with a European village below">
-            <img loading="lazy" src="fun photos-fo prints/DSCF3383.jpg" alt="Two friends posing with arms wide at Great Sand Dunes">
             <img loading="lazy" src="fun photos-fo prints/DSCF9814.jpg" alt="Steel wool fire spinning with sparks flying at night">
             <img loading="lazy" src="Photos of me/IMG_0193.JPG" alt="Santo and a friend on a scooter in an Italian neighborhood">
             <img loading="lazy" src="fun photos-fo prints/DSCF3564.jpg" alt="Three hikers climbing a massive sand dune leaving footprints">
@@ -1235,7 +1266,6 @@
             <img loading="lazy" src="Photos of me/DSCF5169.jpg" alt="Santo posing in front of a traditional Japanese torii gate in Miyajima">
             <img loading="lazy" src="fun photos-fo prints/DSCF9550.jpg" alt="Small dog resting in a green hillside park">
             <img loading="lazy" src="fun photos-fo prints/DSCF6112.jpg" alt="Aerial view of an alpine valley with a European village below">
-            <img loading="lazy" src="fun photos-fo prints/DSCF3383.jpg" alt="Two friends posing with arms wide at Great Sand Dunes">
             <img loading="lazy" src="fun photos-fo prints/DSCF9814.jpg" alt="Steel wool fire spinning with sparks flying at night">
             <img loading="lazy" src="Photos of me/IMG_0193.JPG" alt="Santo and a friend on a scooter in an Italian neighborhood">
             <img loading="lazy" src="fun photos-fo prints/DSCF3564.jpg" alt="Three hikers climbing a massive sand dune leaving footprints">
@@ -1273,6 +1303,7 @@
     <div class="prints-gallery" id="printsGallery">
         <!-- Populated by JS -->
     </div>
+    <div class="pagination" id="pagination"></div>
 </div>
 
 <!-- ============================================================ -->
@@ -1576,9 +1607,11 @@ const printPhotos = [
 	story: "I took this photo as my friend(Carrick) and me were hiking up Mount Bierstadt. We were approaching the summit and the sun was rising. It was beautiful sight in every direction. I had a lot of time to take photos with Carrick not being happy with the pace I was making it up the mountain and asking for constant breaks."},
     // --- PHOTO #2 ---
     { file: "fun photos-fo prints/DSCF0147.jpg", num: 2, name: "Snowy Peaks & Tundra", alt: "Snow-dusted mountain range with overcast skies above brown tundra",
-      story: "This photo was taken after we hiked Mount Bierstadt, and tried to get to Mount Blue Sky Via Sawtooth Ridge. This was an amazing experience of high elevation scrambling and just lounging in the sun at 13,000 feet. My ascent to Blue Sky was foiled after it started hailing and a thunderstorm rolled in which nearly killed me(Sorry mom)" },    // --- PHOTO #3 ---
+      story: "This photo was taken after we hiked Mount Bierstadt, and tried to get to Mount Blue Sky Via Sawtooth Ridge. This was an amazing experience of high elevation scrambling and just lounging in the sun at 13,000 feet. My ascent to Blue Sky was foiled after it started hailing and a thunderstorm rolled in which nearly killed me(Sorry mom)" },    
+	  // --- PHOTO #3 ---
     { file: "fun photos-fo prints/DSCF0213.jpg", num: 3, name: "Alpine Panorama", alt: "Expansive snow-capped alpine mountain range under blue sky",
-      story: "This was taken on a hike in a small town called Bardonecchia on the Italian-French border. When I studied abroad my friend(Aidan) and me took the morning train from Torino and set off to do the hike. We walked through this cute little town in the Alps and into the mountains there was a light amount of snow hitting the ground throughout. After the end of the hike this old house in the middle of this valley we sat down to enjoy a meal, marveling at the views around us. As we were sitting we both thought to ourselves we just have to submit one of these peaks and we did. This is one of the greatest hikes I've ever been on a felt as if I was walking through the lonely mountains from Lord of the Rings. " },    // --- PHOTO #4 ---
+      story: "This was taken on a hike in a small town called Bardonecchia on the Italian-French border. When I studied abroad my friend(Aidan) and me took the morning train from Torino and set off to do the hike. We walked through this cute little town in the Alps and into the mountains there was a light amount of snow hitting the ground throughout. After the end of the hike this old house in the middle of this valley we sat down to enjoy a meal, marveling at the views around us. As we were sitting we both thought to ourselves we just have to submit one of these peaks and we did. This is one of the greatest hikes I've ever been on a felt as if I was walking through the lonely mountains from Lord of the Rings. " },   
+	  // --- PHOTO #4 ---
     { file: "fun photos-fo prints/DSCF0249.jpg", num: 4, name: "The Italian Alps in Early Winter", alt: "Snow-covered peaks stretching across a cloudy winter sky",
 	story: "Another photo from the same hike in Bardonecchia. This was taken after we traversed the ridge making our own path to make the out and back hike a loop. I took this photo as we were sitting in the grass enjoying a bottle of wine together" },
     // --- PHOTO #5 ---
@@ -1588,40 +1621,40 @@ const printPhotos = [
     { file: "fun photos-fo prints/DSCF0275.jpg", num: 6, name: "Alpine Village Stream", alt: "A stream running through a snow-covered European village with mountains behind",
 	story: " One late November weekend my friend and me Ambrose set off the village of Aosta, Italy. As we were passing through the town on our way to the trailhead  we walked over a bridge and I spotted this beautiful stream with this huge mountain face in the background. " },    // --- PHOTO #7 ---
     // --- PHOTO #7 ---
-	{ file: "fun photos-fo prints/DSCF0386.jpg", num: 7, name: "Snowy Treeline", alt: "Pine-covered hillside dusted with snow beneath a mountain backdrop",
+    { file: "fun photos-fo prints/DSCF0386.jpg", num: 7, name: "Snowy Treeline", alt: "Pine-covered hillside dusted with snow beneath a mountain backdrop",
 	story: "This is from the same hike as before as we were approaching the summit. I'd be lying if I said we didn't trudge through several feet of snow to get here. These views were definitely worth how wet my shoes were on my bus ride home." },    // --- PHOTO #8 ---
     // --- PHOTO #8 ---
-	{ file: "fun photos-fo prints/DSCF0494.jpg", num: 8, name: "Greenhouse Dreams", alt: "Lush green plants inside a misty greenhouse with light pouring through",
+    { file: "fun photos-fo prints/DSCF0494.jpg", num: 8, name: "Greenhouse Dreams", alt: "Lush green plants inside a misty greenhouse with light pouring through",
 	story: "When my friends and me were visiting Lyon, France we were told about the free zoo they had. A zoo was never something I had expected to be free so I was very excited for this. On the outskirts of the zoo there was a collection of atrium with load of exotic plants. The humidity in this rooms created this mist and incredibly soft light just made these photo's stunning"},    // --- PHOTO #9 ---
     // --- PHOTO #9 ---
-	{ file: "fun photos-fo prints/DSCF0578.jpg", num: 9, name: "Monochrome Mountains", alt: "Black and white panoramic view of layered mountain ridges under stormy clouds",
+    { file: "fun photos-fo prints/DSCF0578.jpg", num: 9, name: "Monochrome Mountains", alt: "Black and white panoramic view of layered mountain ridges under stormy clouds",
      story: "One of the great advantages of going to college in Denver is the great views you get if you just look west. This one was taken early one morning on top of a parking garage. I switched it to black and white because I just love emulating that old feel." },    // --- PHOTO #10 ---
 	// --- PHOTO #10 ---
-	{ file: "fun photos-fo prints/DSCF0596.jpg", num: 10, name: "Harbor Flags", alt: "Colorful flags waving at a sunlit seaside harbor with boats in the distance",
+    { file: "fun photos-fo prints/DSCF0596.jpg", num: 10, name: "Harbor Flags", alt: "Colorful flags waving at a sunlit seaside harbor with boats in the distance",
      story: "When I studied abroad, I took a 48-hour trip to Dublin. On my last day I took a day trip to the small costal town of Howth, north of Dublin. Howth reminded me lot of my Hometown of Half Moon Bay but Irish. I was walking towards the ocean and spotted this pub being hit with the soft morning light and these weathered flags. A testament to how long they had survived." },    // --- PHOTO #11 ---
 	// --- PHOTO #11 ---
-	{ file: "fun photos-fo prints/DSCF1345.jpg", num: 11, name: "Pacific Coast Dusk", alt: "Waves breaking along a wide sandy beach at dusk with misty hills",
+    { file: "fun photos-fo prints/DSCF1345.jpg", num: 11, name: "Pacific Coast Dusk", alt: "Waves breaking along a wide sandy beach at dusk with misty hills",
      story: "This photo was taken near my Home in Half Moon Bay, California. When I'm home of my favorite things to do is to walk down to the beach during sunset and enjoy the beauty. This is one of my favorite spots in the world somewhere I always feel calm in contrast with how powerful the ocean is. This particular image was captured as I was walking home, the sun had already set and the oceanside blue hour is just stunning." },    // --- PHOTO #12 ---
 	// --- PHOTO #12 ---
-	{ file: "fun photos-fo prints/DSCF1553.jpg", num: 12, name: "Sunrise Soarer", alt: "A bird in flight over layered purple and pink mountain ridges at sunset",
+    { file: "fun photos-fo prints/DSCF1553.jpg", num: 12, name: "Sunrise Soarer", alt: "A bird in flight over layered purple and pink mountain ridges at sunset",
      story: "This photo was taken from the same parking lot as the photo a couple before. Alos during  the morning I remember walking up to my alarm that was much too early, bundling in all of my warmest clothes, and grabbing the telephoto lense. The morning colors were amazing, and I was so lucky to catch this lone bird flying." },    // --- PHOTO #13 ---
 	// --- PHOTO #13 ---
-	{ file: "fun photos-fo prints/DSCF1892.jpg", num: 13, name: "Emerald Coastline", alt: "Turquoise waves crashing on a misty shore with orange wildflowers in the foreground",
+    { file: "fun photos-fo prints/DSCF1892.jpg", num: 13, name: "Emerald Coastline", alt: "Turquoise waves crashing on a misty shore with orange wildflowers in the foreground",
      story: "Another Photo taken in my beautiful home town of Half Moon Bay. This was taken at Montara Beach, my friend Owen and me walked along this path and I found this great spot overlooking the beach with this wildflowers. The ocean was this amazing Emerald color. "},    // --- PHOTO #14 ---
 	// --- PHOTO #14 ---
-	{ file: "fun photos-fo prints/DSCF1933.jpg", num: 14, name: "Wildflower Cove", alt: "Purple wildflowers blooming on a clifftop overlooking a wide sandy beach",
+    { file: "fun photos-fo prints/DSCF1933.jpg", num: 14, name: "Wildflower Cove", alt: "Purple wildflowers blooming on a clifftop overlooking a wide sandy beach",
 		story: "A photo of Montara Beach, further up the path we found we found this spot that was blanked by these purple wildflowers. By this points the clouds had come in more and created giving the classic foggy Half Moon Bay look."},    // --- PHOTO #15 ---
 	// --- PHOTO #15 ---
-	{ file: "fun photos-fo prints/DSCF2541-Pano.jpg", num: 15, name: "God Rays", alt: "Dramatic golden sunbeams breaking through dark storm clouds over the mountains",
+    { file: "fun photos-fo prints/DSCF2541-Pano.jpg", num: 15, name: "God Rays", alt: "Dramatic golden sunbeams breaking through dark storm clouds over the mountains",
 	story: "When I was a sophomore in college, I had the privilege of having a dorm with west facing windows. One afternoon I was sitting in my room and glanced out the window and saw these powerful beams of light piercing thought the cloudy horizon. I quickly grabbed my camera and captured this amazing moment."},    // --- PHOTO #16 ---
 	// --- PHOTO #16 ---
-	{ file: "fun photos-fo prints/DSCF2690.jpg", num: 16, name: "Golden Peak", alt: "Snow-capped mountain peak glowing with golden sunset light above a valley",
+    { file: "fun photos-fo prints/DSCF2690.jpg", num: 16, name: "Golden Peak", alt: "Snow-capped mountain peak glowing with golden sunset light above a valley",
 	story: "Spring of my junior year Carrick and I went up to Buena Vista to go camping for a weekend. At the time we had only hung out a couple times, and we were not as close as we are now. This trip was a real bonding experience for us. At our campsite there was this huge rock where we found a way to climb up and sat in this little hole at the top where we were protected from the wind. As the sun set, we sat, talked and drank. I captured this photo just as the last bits of light were hitting the mountain."},    // --- PHOTO #17 ---
 	// --- PHOTO #17 ---
-	{ file: "fun photos-fo prints/DSCF2960-2.jpg", num: 17, name: "Storm Brewing", alt: "Towering blue storm clouds gathering above a treeline at dusk",
+    { file: "fun photos-fo prints/DSCF2960-2.jpg", num: 17, name: "Storm Brewing", alt: "Towering blue storm clouds gathering above a treeline at dusk",
 	story: "On our second day of the trip we were hit by a huge rainstorm and tent bound for much of the afternoon, but as the rain cloud were starting to leave I started walking around the campsite and captured this remarkable image. The clouds just looked so powerful behind the tree."},    // --- PHOTO #18 ---
 	// --- PHOTO #18 ---
-	{ file: "fun photos-fo prints/DSCF2961.jpg", num: 18, name: "Starry Night Trail", alt: "Night sky with stars and a red light trail streaking above dark trees",
+    { file: "fun photos-fo prints/DSCF2961.jpg", num: 18, name: "Starry Night Trail", alt: "Night sky with stars and a red light trail streaking above dark trees",
 	story: "Later in the night at Buena Vista, I was out on the rocks looking talking photos of the stars on the rocks. While talking photos A plane passed into frame and the long exposure captured its trail creating this great effect."},    // --- PHOTO #19 ---
     { file: "fun photos-fo prints/DSCF3167-1.jpg", num: 19, name: "Bicycle Under the Oaks", alt: "A bicycle leaning against a large oak tree in a sunlit summer park",
 	story: "One summer I spent a lot of time biking around Wash Park in Denver. I noticed how beautiful it was during sunset so one time I brought my camera along with me. To take this photo I propped my bike on a tree and took this photo."},
@@ -1640,15 +1673,15 @@ const printPhotos = [
     { file: "fun photos-fo prints/DSCF3845.jpg", num: 24, name: "Creekside Adventure", alt: "Off-road vehicle parked by a mountain creek on a sunny summer day",
 	story: "For 4th of July one Summer I went up to Crested Butte with a group of friends. We had driven down to this creek to hang out. The Land Rover looked absolutely stunning in this location."},
     // --- PHOTO #25 ---
-    { file: "fun photos-fo prints/DSCF3861.jpg", num: 25, name: "Starlit Peak", alt: "A mountain peak glowing under a star-filled sky with wispy clouds",
-      story: "Stayed up late to photograph this peak under the stars. The clouds drifting past added movement to an otherwise still night." },
-    // --- PHOTO #26 ---
+    { file: "fun photos-fo prints/DSCF3861.jpg", num: 25, name: "Crested Butte Stars ", alt: "A mountain peak glowing under a star-filled sky with wispy clouds",
+	story: "In Crested Butte even still near the downtown area there is little light pollution. Sitting outside at night and looking at the magnificence that is the face of Mount Crested Butte. I remember setting my camera on top of my car and pointing it at the mountain. With it being a long exposure "},   
+	// --- PHOTO #26 ---
     { file: "fun photos-fo prints/DSCF4032.jpg", num: 26, name: "Aspen Grove", alt: "A lush grove of white-barked aspen trees bathed in vibrant green summer light",
-      story: "Walked into this aspen grove and the green light filtering through was almost surreal. One of my favorite summer shots." },
-    // --- PHOTO #27 ---
-    { file: "fun photos-fo prints/DSCF4571.jpg", num: 27, name: "Riverside Canoes", alt: "Red and white canoes resting in the grass by a calm river",
-      story: "These canoes sitting by the river in the tall grass caught my eye. Something about the colors and the quiet scene felt nostalgic." },
-    // --- PHOTO #28 ---
+	story: "On my last day of my Crested Butte, I woke wanting some adventure Ide been told there was some nice hiking trails near where we were staying. I wanted to summit Mount Crested Butte but didn't know if it was possible from where I was but I set out hiking. The start of the hike was though an aspen grove forest with just me, the wind hitting the tree branches, and the birds chirping. I was a fantastic and peaceful experience, and I have this photo to show from it."},    
+	// --- PHOTO #27 ---
+    { file: "fun photos-fo prints/DSCF4571.jpg", num: 27, name: "Fuju Canoes", alt: "Red and white canoes resting in the grass by a lake near Mt. Fuji",
+	story: "In the summer of 2025 I traveled to Japan. My friend Aidan who I hadn't seen in a while was living there for work and my friend Ambrose goes to school there so, I thought well I'm never going to have a better chance to travel there. Aidan and Me's big adventure was to hike Mount Fuji. This is my favorite photo from that trip and I find it funny how much I like this photo more than the one where if I had spun around and photographed one of the worlds most recognizable natural landmarks. Sometimes the simplest stuff is the most beautiful"},
+	// --- PHOTO #28 ---
     { file: "fun photos-fo prints/DSCF4676.jpg", num: 28, name: "Pastel Sunset Shore", alt: "Soft pink and peach sunset over ocean waves breaking on a sandy beach",
       story: "One of those pastel sunsets where the sky and ocean melt into the same soft palette. Stood there until the last bit of color faded." },
     // --- PHOTO #29 ---
@@ -1664,14 +1697,143 @@ const printPhotos = [
     { file: "fun photos-fo prints/DSCF6112.jpg", num: 32, name: "Alpine Valley Vista", alt: "Aerial view of a lush green alpine valley with a village and winding road",
       story: "Looking down into a green alpine valley from high above. The tiny village and winding road gave a sense of just how vast this landscape is." },
     // --- PHOTO #33 ---
-    { file: "fun photos-fo prints/DSCF6888.jpg", num: 33, name: "Italian Harbor", alt: "Colorful buildings and boats in a turquoise Italian harbor with mountains behind",
-      story: "The colors of this Italian harbor blew me away -- turquoise water, pastel buildings, and mountains in the background. Doesn't feel real." },
-    // --- PHOTO #34 ---
-    { file: "fun photos-fo prints/DSCF9550.jpg", num: 34, name: "Hillside Pup", alt: "A small dog resting in green grass on a misty hillside park",
-      story: "This little dog was just hanging out on a hillside park, watching the world go by. Had to capture the vibe." },
+    { file: "fun photos-fo prints/DSCF9550.jpg", num: 33, name: "Hillside Pup", alt: "A small dog resting in green grass on a misty hillside park",
+	story: "When I was studying abroad In Italy, some friend and me were walking up to this hill to enjoy the sunset and out 30 cent bottle of wine we had just purchased. As we were walking up a man around our age stopped us and asked if we were American. After talking to him we learnt he was called Ricky was a dual Italian-American raised in Italy. We told Ricky he should join us at the top of the hill for sunset. He did and this is a photo of his dog Cody. After this moment we started inviting Ricky to all of our group functions and he became one of my closets friends I met while studying abroad. "},  
+	// --- PHOTO #34 ---
+    { file: "fun photos-fo prints/DSCF9814.jpg", num: 34, name: "Fire Spinner", alt: "Explosive steel wool fire spinning with sparks flying against a black night sky",
+story: "While Studying abroad some friends and me went to Marrakesh for the weekend. This photo was taken on the day we did a dessert excursion with ATV and camel riding as well as a traditional dinner. The night was capped off with a fire show. The long exposure captures the majesticness and danger of the show."},
     // --- PHOTO #35 ---
-    { file: "fun photos-fo prints/DSCF9814.jpg", num: 35, name: "Fire Spinner", alt: "Explosive steel wool fire spinning with sparks flying against a black night sky",
-      story: "Steel wool fire spinning at night. The sparks flying everywhere made for an explosive long-exposure shot." },
+    { file: "fun photos-fo prints/DSCF0224.jpg", num: 35, name: "Photo 36", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #36 ---
+    { file: "fun photos-fo prints/DSCF2980.jpg", num: 36, name: "Photo 37", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #37 ---
+    { file: "fun photos-fo prints/DSCF2988.jpg", num: 37, name: "Photo 38", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #38 ---
+    { file: "fun photos-fo prints/DSCF4131.jpg", num: 38, name: "Photo 41", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #39 ---
+    { file: "fun photos-fo prints/DSCF4155.jpg", num: 39, name: "Photo 42", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #40 ---
+    { file: "fun photos-fo prints/DSCF4170.jpg", num: 40, name: "Photo 43", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #41 ---
+    { file: "fun photos-fo prints/DSCF4182.jpg", num: 41, name: "Photo 44", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #42 ---
+    { file: "fun photos-fo prints/DSCF4291.jpg", num: 42, name: "Photo 45", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #43 ---
+    { file: "fun photos-fo prints/DSCF4294.jpg", num: 43, name: "Photo 46", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #44 ---
+    { file: "fun photos-fo prints/DSCF4386.jpg", num: 44, name: "Photo 47", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #45 ---
+    { file: "fun photos-fo prints/DSCF4417.jpg", num: 45, name: "Photo 48", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #46 ---
+    { file: "fun photos-fo prints/DSCF4544.jpg", num: 46, name: "Photo 49", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #47 ---
+    { file: "fun photos-fo prints/DSCF4572.jpg", num: 47, name: "Photo 50", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #48 ---
+    { file: "fun photos-fo prints/DSCF4657.jpg", num: 48, name: "Photo 51", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #49 ---
+    { file: "fun photos-fo prints/DSCF4757-2.jpg", num: 49, name: "Photo 52", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #50 ---
+    { file: "fun photos-fo prints/DSCF4779.jpg", num: 50, name: "Photo 53", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #51 ---
+    { file: "fun photos-fo prints/DSCF4784.jpg", num: 51, name: "Photo 54", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #52 ---
+    { file: "fun photos-fo prints/DSCF4884.jpg", num: 52, name: "Photo 55", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #53 ---
+    { file: "fun photos-fo prints/DSCF4891.jpg", num: 53, name: "Photo 56", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #54 ---
+    { file: "fun photos-fo prints/DSCF4892.jpg", num: 54, name: "Photo 57", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #55 ---
+    { file: "fun photos-fo prints/DSCF4901.jpg", num: 55, name: "Photo 58", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #56 ---
+    { file: "fun photos-fo prints/DSCF4918.jpg", num: 56, name: "Photo 59", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #57 ---
+    { file: "fun photos-fo prints/DSCF4964.jpg", num: 57, name: "Photo 60", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #58 ---
+    { file: "fun photos-fo prints/DSCF4978-2.jpg", num: 58, name: "Photo 61", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #59 ---
+    { file: "fun photos-fo prints/DSCF4996.jpg", num: 59, name: "Photo 62", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #60 ---
+    { file: "fun photos-fo prints/DSCF5171.jpg", num: 60, name: "Photo 63", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #61 ---
+    { file: "fun photos-fo prints/DSCF5320.jpg", num: 61, name: "Photo 64", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #62 ---
+    { file: "fun photos-fo prints/DSCF5464.jpg", num: 62, name: "Photo 65", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #63 ---
+    { file: "fun photos-fo prints/DSCF5499.jpg", num: 63, name: "Photo 66", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #64 ---
+    { file: "fun photos-fo prints/DSCF5599-2.jpg", num: 64, name: "Photo 67", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #65 ---
+    { file: "fun photos-fo prints/DSCF5685.jpg", num: 65, name: "Photo 68", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #66 ---
+    { file: "fun photos-fo prints/DSCF5757.jpg", num: 66, name: "Photo 69", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #67 ---
+    { file: "fun photos-fo prints/DSCF5765.jpg", num: 67, name: "Photo 70", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #68 ---
+    { file: "fun photos-fo prints/DSCF5812.jpg", num: 68, name: "Photo 71", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #69 ---
+    { file: "fun photos-fo prints/DSCF5818.jpg", num: 69, name: "Photo 72", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #70 ---
+    { file: "fun photos-fo prints/DSCF5925.jpg", num: 70, name: "Photo 73", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #71 ---
+    { file: "fun photos-fo prints/DSCF5950.jpg", num: 71, name: "Photo 74", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #72 ---
+    { file: "fun photos-fo prints/DSCF6577.jpg", num: 72, name: "Photo 76", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #73 ---
+    { file: "fun photos-fo prints/DSCF6891.jpg", num: 73, name: "Photo 77", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #74 ---
+    { file: "fun photos-fo prints/DSCF6919.jpg", num: 74, name: "Photo 78", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #75 ---
+    { file: "fun photos-fo prints/DSCF7806.jpg", num: 75, name: "Photo 79", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #76 ---
+    { file: "fun photos-fo prints/DSCF8171.jpg", num: 76, name: "Photo 80", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #77 ---
+    { file: "fun photos-fo prints/DSCF8203.jpg", num: 77, name: "Photo 81", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #78 ---
+    { file: "fun photos-fo prints/DSCF8208.jpg", num: 78, name: "Photo 82", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #79 ---
+    { file: "fun photos-fo prints/DSCF8761.jpg", num: 79, name: "Photo 83", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #80 ---
+    { file: "fun photos-fo prints/DSCF9164.jpg", num: 80, name: "Photo 84", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #81 ---
+    { file: "fun photos-fo prints/DSCF9270.jpg", num: 81, name: "Photo 85", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #82 ---
+    { file: "fun photos-fo prints/DSCF9572.jpg", num: 82, name: "Photo 86", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #83 ---
+    { file: "fun photos-fo prints/DSCF9705.jpg", num: 83, name: "Photo 87", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #84 ---
+    { file: "fun photos-fo prints/DSCF9706.jpg", num: 84, name: "Photo 88", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #85 ---
+    { file: "fun photos-fo prints/DSCF9873.jpg", num: 85, name: "Photo 89", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #86 ---
+    { file: "fun photos-fo prints/0B47F8B4-42BF-47B2-B379-4CCAE66FEA3C-3055-000000A0213F7DA6.jpg", num: 86, name: "Photo 90", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #87 ---
+    { file: "fun photos-fo prints/0B7A28EC-0715-4653-B5C1-801923C6114C-19677-000003C295153013.jpg", num: 87, name: "Photo 91", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #88 ---
+    { file: "fun photos-fo prints/1E460434-C510-4C21-A845-42C4C9DD7476-3055-0000009FF8099489.jpg", num: 88, name: "Photo 92", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #89 ---
+    { file: "fun photos-fo prints/374321F3-F6E9-4751-B2E6-0B4810492973-2176-00000063AE2DF3AF.jpg", num: 89, name: "Photo 93", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #90 ---
+    { file: "fun photos-fo prints/6E283A92-7B29-43F2-8E44-3DED2BA8F95D-414-00000000F6613DCF.jpg", num: 90, name: "Photo 94", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #91 ---
+    { file: "fun photos-fo prints/85148F7D-DFDB-4BD2-B9DB-C9FF7577725A-19677-000003C122D9065B.jpg", num: 91, name: "Photo 95", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #92 ---
+    { file: "fun photos-fo prints/8A1375EA-ED2E-46EC-BCE1-C6A73B31AA1F-2176-000000632039C83C.jpg", num: 92, name: "Photo 96", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #93 ---
+    { file: "fun photos-fo prints/8DC70CF4-3836-4EA5-BCAC-B6FF3A3E9DB4-3055-0000009F47BF1BB6.jpg", num: 93, name: "Photo 97", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #94 ---
+    { file: "fun photos-fo prints/A4774A00-ECE4-4BC8-B1C9-28C9CB3686FB-2176-000000636C437B69.jpg", num: 94, name: "Photo 98", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #95 ---
+    { file: "fun photos-fo prints/APC_0017.jpg", num: 95, name: "Photo 99", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #96 ---
+    { file: "fun photos-fo prints/B2B11916-4B67-4C37-802C-5BCA464D16D5-3055-000000A017EDEFFD.jpg", num: 96, name: "Photo 100", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #97 ---
+    { file: "fun photos-fo prints/BA8F959B-7A51-48A2-A61C-9C6CB18ACFA4-3055-0000009FE697A1E5.jpg", num: 97, name: "Photo 101", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #98 ---
+    { file: "fun photos-fo prints/C84BD74F-A13F-4231-9B69-BBCCF98FB0E0-2176-00000060910AB1B5.jpg", num: 98, name: "Photo 102", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #99 ---
+    { file: "fun photos-fo prints/D8A4D570-E089-425E-85D0-74099B3BC0F3-19677-000003C2AC0EADE1.jpg", num: 99, name: "Photo 103", alt: "Landscape photograph", story: "Landscape photograph" },
+    // --- PHOTO #100 ---
+    { file: "fun photos-fo prints/IMG_3186.JPG", num: 100, name: "Photo 105", alt: "Landscape photograph", story: "Landscape photograph" },
 ];
 
 // ===== PAGE NAVIGATION =====
@@ -1731,16 +1893,28 @@ function showToast(msg) {
     setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// ===== POPULATE PRINTS GALLERY =====
-function populatePrints() {
+// ===== POPULATE PRINTS GALLERY WITH PAGINATION =====
+const PHOTOS_PER_PAGE = 20;
+let currentPrintPage = 1;
+
+function populatePrints(page) {
+    if (page === undefined) page = currentPrintPage;
+    currentPrintPage = page;
     const gallery = document.getElementById('printsGallery');
     gallery.innerHTML = '';
-    printPhotos.forEach((photo, index) => {
+
+    const totalPages = Math.ceil(printPhotos.length / PHOTOS_PER_PAGE);
+    const start = (page - 1) * PHOTOS_PER_PAGE;
+    const end = Math.min(start + PHOTOS_PER_PAGE, printPhotos.length);
+    const pagePhotos = printPhotos.slice(start, end);
+
+    pagePhotos.forEach((photo, i) => {
+        const index = start + i;
         const card = document.createElement('div');
         card.className = 'print-card';
         card.style.cursor = 'pointer';
         card.innerHTML = `
-            <img loading="lazy" src="${photo.file}" alt="${photo.alt}" loading="lazy">
+            <img loading="lazy" src="${photo.file}" alt="${photo.alt}">
             <div class="print-label">
                 <span>#${photo.num} - ${photo.name}</span>
                 <span class="print-num">${photo.num}</span>
@@ -1749,6 +1923,37 @@ function populatePrints() {
         card.onclick = () => openDetail(index);
         gallery.appendChild(card);
     });
+
+    renderPagination(totalPages, page);
+}
+
+function renderPagination(totalPages, currentPage) {
+    const container = document.getElementById('pagination');
+    container.innerHTML = '';
+
+    const prevBtn = document.createElement('button');
+    prevBtn.textContent = 'Prev';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.onclick = () => { populatePrints(currentPage - 1); scrollToGallery(); };
+    container.appendChild(prevBtn);
+
+    for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        if (i === currentPage) btn.classList.add('active');
+        btn.onclick = () => { populatePrints(i); scrollToGallery(); };
+        container.appendChild(btn);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = 'Next';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.onclick = () => { populatePrints(currentPage + 1); scrollToGallery(); };
+    container.appendChild(nextBtn);
+}
+
+function scrollToGallery() {
+    document.getElementById('printsGallery').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ===== PHOTO DETAIL VIEW =====

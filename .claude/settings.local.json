@@ -11,7 +11,8 @@
       "Bash(find . \\\\\\( -name \"*.jpg\" -o -name \"*.JPG\" -o -name \"*.jpeg\" -o -name \"*.png\" \\\\\\) -exec ls -l {} +)",
       "Bash(pip show:*)",
       "Bash(python compress_images.py)",
-      "Bash(node --check /tmp/test_script.js)"
+      "Bash(node --check /tmp/test_script.js)",
+      "Bash(python update_descriptions.py)"
     ]
   }
 }

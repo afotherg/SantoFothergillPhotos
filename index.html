@@ -1054,11 +1054,12 @@
 
         .photo-detail img {
             width: 100%;
-            height: auto;
+            height: 100%;
             max-height: 80vh;
             object-fit: contain;
             border-radius: 20px 0 0 20px;
             background: #f0f0f0;
+            align-self: stretch;
         }
 
         .photo-detail-info {
@@ -1640,7 +1641,7 @@ const printPhotos = [
      story: "This photo was taken from the same parking lot as the photo a couple before. Alos during  the morning I remember walking up to my alarm that was much too early, bundling in all of my warmest clothes, and grabbing the telephoto lense. The morning colors were amazing, and I was so lucky to catch this lone bird flying." },    // --- PHOTO #13 ---
 	// --- PHOTO #13 ---
     { file: "fun photos-fo prints/DSCF1892.jpg", num: 13, name: "Emerald Coastline", alt: "Turquoise waves crashing on a misty shore with orange wildflowers in the foreground",
-     story: "Another Photo taken in my beautiful home town of Half Moon Bay. This was taken at Montara Beach, my friend Owen and me walked along this path and I found this great spot overlooking the beach with this wildflowers. The ocean was this amazing Emerald color. "},    // --- PHOTO #14 ---
+     story: "Another Photo taken in my beautiful home town of Half Moon Bay. This was taken at Montara Beach, my friend Owen and me walked along this path and I found this great spot overlooking the beach with this wildflowers. The ocean was this amazing Emerald color."},    // --- PHOTO #14 ---
 	// --- PHOTO #14 ---
     { file: "fun photos-fo prints/DSCF1933.jpg", num: 14, name: "Wildflower Cove", alt: "Purple wildflowers blooming on a clifftop overlooking a wide sandy beach",
 		story: "A photo of Montara Beach, further up the path we found we found this spot that was blanked by these purple wildflowers. By this points the clouds had come in more and created giving the classic foggy Half Moon Bay look."},    // --- PHOTO #15 ---
@@ -1683,8 +1684,7 @@ const printPhotos = [
 	story: "In the summer of 2025 I traveled to Japan. My friend Aidan who I hadn't seen in a while was living there for work and my friend Ambrose goes to school there so, I thought well I'm never going to have a better chance to travel there. Aidan and Me's big adventure was to hike Mount Fuji. This is my favorite photo from that trip and I find it funny how much I like this photo more than the one where if I had spun around and photographed one of the worlds most recognizable natural landmarks. Sometimes the simplest stuff is the most beautiful"},
 	// --- PHOTO #28 ---
     { file: "fun photos-fo prints/DSCF4676.jpg", num: 28, name: "Pastel Sunset Shore", alt: "Soft pink and peach sunset over ocean waves breaking on a sandy beach",
-      story: "One of those pastel sunsets where the sky and ocean melt into the same soft palette. Stood there until the last bit of color faded." },
-    // --- PHOTO #29 ---
+      story: "Another one from gorgeous Half Moon Bay. The pastel colors were a marvel to look at. And I was super proud of this work"},    // --- PHOTO #29 ---
     { file: "fun photos-fo prints/DSCF5304.jpg", num: 29, name: "Clifftop Cove", alt: "Turquoise ocean waves curving along sandy cliffs viewed from above",
       story: "Shot from high up on a cliff looking down at the waves curving along the shore. The turquoise water against the sand was stunning." },
     // --- PHOTO #30 ---
@@ -1703,9 +1703,10 @@ const printPhotos = [
     { file: "fun photos-fo prints/DSCF9814.jpg", num: 34, name: "Fire Spinner", alt: "Explosive steel wool fire spinning with sparks flying against a black night sky",
 story: "While Studying abroad some friends and me went to Marrakesh for the weekend. This photo was taken on the day we did a dessert excursion with ATV and camel riding as well as a traditional dinner. The night was capped off with a fire show. The long exposure captures the majesticness and danger of the show."},
     // --- PHOTO #35 ---
-    { file: "fun photos-fo prints/DSCF0224.jpg", num: 35, name: "Summit Silhouette", alt: "Hiker adjusting hat on snowy mountain summit with alpine peaks beyond", story: "A lone figure stands at the edge of a snow-dusted ridge, hands raised to adjust their beanie against the wind. The vast, misty mountain range stretching behind them captures that raw, exhilarating feeling of reaching the top." },
+    { file: "fun photos-fo prints/DSCF0224.jpg", num: 35, name: "Summit Silhouette", alt: "Hiker adjusting hat on snowy mountain summit with alpine peaks beyond", story: "This is a photo of me from the peak of the hike I did in Bardonecchia, Italy. My friend Aidan took this one. This is from back in the day when I only had manual focus on my camera, he didn’t quite nail the focus on this shot, but he did nail the feeling of happiness I had on top of this mountain."},
     // --- PHOTO #36 ---
-    { file: "fun photos-fo prints/DSCF2980.jpg", num: 36, name: "Night Streak", alt: "Meteor streaks across a cloudy night sky above distant city lights", story: "A long-exposure shot catches what appears to be a meteor or satellite tracing a bright line through layers of moody clouds. The faint glow of a town below anchors the scene, making the sky feel impossibly vast." },
+    { file: "fun photos-fo prints/DSCF2980.jpg", num: 36, name: "Night Streak", alt: "Meteor streaks across a cloudy night sky above distant city lights", 
+story: "A photo from my camping trip in Buena Vista. I sat on this rock watching the stars and watched the clouds slowly engulf the sky. Though the last gap in the cloud I captured this shot which also got these streaks of light from passing planes and sattelites."},
     // --- PHOTO #37 ---
     { file: "fun photos-fo prints/DSCF2988.jpg", num: 37, name: "Pine Curtain", alt: "Sunlit pine trees frame a rocky hillside under blue sky with clouds", story: "Warm, golden-green pines part like a curtain to reveal a rugged rock formation in the distance. The soft, almost film-like color palette gives this scene a nostalgic, timeless quality." },
     // --- PHOTO #38 ---
@@ -1817,7 +1818,7 @@ story: "While Studying abroad some friends and me went to Marrakesh for the week
     // --- PHOTO #91 ---
     { file: "fun photos-fo prints/85148F7D-DFDB-4BD2-B9DB-C9FF7577725A-19677-000003C122D9065B.jpg", num: 91, name: "Olive Shore", alt: "Turquoise Mediterranean sea glimpsed through olive branches and rocky shore", story: "A rocky coastal path framed by silvery olive branches opens onto a sweeping view of the turquoise Mediterranean, with distant mountains fading into the mist. The scene feels like stumbling upon a secret shoreline on a quiet island afternoon." },
     // --- PHOTO #92 ---
-    { file: "fun photos-fo prints/8A1375EA-ED2E-46EC-BCE1-C6A73B31AA1F-2176-000000632039C83C.jpg", num: 92, name: "Backcountry Camp", alt: "A backcountry tent pitched among boulders beneath towering mountain peaks", story: "A small dome tent sits nestled among sun-dappled rocks and pines in a high mountain basin, with craggy peaks filling the sky behind it. The image captures the reward of hauling your gear deep into the backcountry -- waking up surrounded by nothing but wilderness." },
+    { file: "fun photos-fo prints/8A1375EA-ED2E-46EC-BCE1-C6A73B31AA1F-2176-000000632039C83C.jpg", num: 92, name: "Teton's Backcountry Camp", alt: "A backcountry tent pitched among boulders beneath towering mountain peaks", story: "A small dome tent sits nestled among sun-dappled rocks and pines in a high mountain basin, with craggy peaks filling the sky behind it. The image captures the reward of hauling your gear deep into the backcountry -- waking up surrounded by nothing but wilderness." },
     // --- PHOTO #93 ---
     { file: "fun photos-fo prints/8DC70CF4-3836-4EA5-BCAC-B6FF3A3E9DB4-3055-0000009F47BF1BB6.jpg", num: 93, name: "Trail Friends", alt: "A group of friends lounging together on golden alpine grass", story: "Six friends lie sprawled on a golden hillside meadow in the mountains, grinning and leaning into one another with the easy comfort of close companionship. The warm autumn grass and rocky slopes behind them set the scene for an unforgettable day on the trail." },
     // --- PHOTO #94 ---

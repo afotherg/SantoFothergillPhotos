@@ -3,3 +3,7 @@ originals_backup/
 
 # Compression script (not needed on the site)
 compress_images.py
+
+# Local tooling and build artifacts (not part of the site)
+fun photos-fo prints/.claude/
+fun photos-fo prints/tiktok_build/

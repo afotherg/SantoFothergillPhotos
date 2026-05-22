@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Santo Fothergill Photos | Denver Photographer - Graduation, Engagement & Headshots</title>
     <meta name="description" content="Santo Fothergill is a Denver-based photographer specializing in graduation photos, engagement sessions, professional headshots, and group photography. Book your session today.">
-    <meta name="keywords" content="Santo Fothergill, Santo Fothergill Photos, Denver photographer, graduation photographer, engagement photographer, professional headshots, group photography, DU photographer, University of Denver photographer">
+    <meta name="keywords" content="Santo Fothergill, Santo Fothergill Photos, Denver photographer, graduation photographer, engagement photographer, professional headshots, group photography, DU photographer, University of Denver photographer, Lightroom presets, Fothergill presets, photo editing presets">
     <meta name="author" content="Santo Fothergill">
     <link rel="canonical" href="https://santophotos.fothergill.com/">
 
@@ -791,6 +791,193 @@
             margin-bottom: 1.5rem;
         }
 
+        /* ===== PRESETS PAGE ===== */
+        .presets-hero {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            background: linear-gradient(135deg, var(--peach) 0%, var(--lavender) 100%);
+        }
+
+        .presets-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .presets-intro {
+            background: white;
+            max-width: 800px;
+            margin: -2rem auto 3rem;
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .presets-intro p {
+            font-size: 1.05rem;
+            color: var(--text-med);
+            line-height: 1.8;
+        }
+
+        .preset-packs {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .preset-pack {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+        }
+
+        .preset-pack-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .preset-pack-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .preset-pack-header .preset-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--mint), var(--sky));
+            color: var(--text-dark);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .preset-pack-header .preset-badge.paid {
+            background: linear-gradient(135deg, var(--peach), var(--soft-pink));
+        }
+
+        .preset-pack-header p {
+            color: var(--text-med);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .preset-comparisons {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .preset-comparisons.two-up {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .preset-comparison {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .preset-image-wrap {
+            position: relative;
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+            background: #f0f0f0;
+        }
+
+        .preset-image-wrap img {
+            width: 100%;
+            display: block;
+            transition: opacity 0.4s ease;
+        }
+
+        .preset-image-wrap .preset-label {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0,0,0,0.65);
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+            transition: background 0.3s;
+        }
+
+        .preset-image-wrap.edited .preset-label {
+            background: var(--accent);
+        }
+
+        .preset-toggle-btn {
+            margin-top: 1rem;
+            min-width: 220px;
+        }
+
+        .preset-cta {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .preset-cta .preset-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .preset-cta .preset-price-note {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .preset-cta-buttons {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .preset-secondary-note {
+            display: block;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Mobile tweaks for presets */
+        @media (max-width: 768px) {
+            .preset-comparisons.two-up {
+                grid-template-columns: 1fr;
+            }
+
+            .preset-pack {
+                padding: 1.5rem;
+            }
+
+            .presets-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .presets-intro {
+                padding: 1.5rem;
+                margin: -2rem 1rem 2rem;
+            }
+        }
+
         /* ===== BOOKING MODAL ===== */
         .calendar-grid {
             display: grid;
@@ -1147,6 +1334,7 @@
             <li><a href="#" class="active" data-page="home" onclick="showPage('home', event)">Home</a></li>
             <li><a href="#" data-page="book" onclick="showPage('book', event)">Book a Session</a></li>
             <li><a href="#" data-page="prints" onclick="showPage('prints', event)">Purchase Prints / Explore My Work</a></li>
+            <li><a href="#" data-page="presets" onclick="showPage('presets', event)">Presets</a></li>
         </ul>
         <div class="hamburger" onclick="toggleNav()">
             <span></span><span></span><span></span>
@@ -1423,6 +1611,106 @@
 </div>
 
 <!-- ============================================================ -->
+<!-- PRESETS PAGE -->
+<!-- ============================================================ -->
+<div class="page-section" id="page-presets">
+
+    <section class="presets-hero">
+        <h1>Fothergill Presets</h1>
+        <p style="color: var(--text-med); font-size: 1.1rem; margin-top: 0.5rem;">Lightroom presets to give your photos that pop.</p>
+    </section>
+
+    <div class="presets-intro">
+        <p>Learning how to edit photos can feel intimidating at first -- but I'm here to help. My presets help your photos come out less flat, give a pop of color, and add some style to them. Because of differences in lighting and environment, no single preset will look great on every photo, but with my variety of looks you'll always find one that makes any image pop.</p>
+    </div>
+
+    <div class="preset-packs">
+
+        <!-- FREE TRIAL PACK -->
+        <div class="preset-pack" id="freePack">
+            <div class="preset-pack-header">
+                <span class="preset-badge">Free Trial Pack</span>
+                <h2>Try Before You Buy</h2>
+                <p>Hit "Apply Preset" below to see exactly what my editing can do to a photo straight out of the camera.</p>
+            </div>
+
+            <div class="preset-comparisons">
+                <div class="preset-comparison">
+                    <div class="preset-image-wrap" id="freePreview">
+                        <span class="preset-label">Unedited Photo</span>
+                        <img loading="lazy"
+                             src="Presets/Images/Free/Cabo.Basic.jpg"
+                             data-before="Presets/Images/Free/Cabo.Basic.jpg"
+                             data-after="Presets/Images/Free/Cabo.Cabo1.jpg"
+                             data-before-label="Unedited Photo"
+                             data-after-label="With Cabo Preset"
+                             alt="Unedited photo before applying the free Cabo preset">
+                    </div>
+                    <button type="button" class="btn btn-primary preset-toggle-btn" onclick="togglePreset('freePreview', this)">Apply Preset</button>
+                </div>
+            </div>
+
+            <div class="preset-cta">
+                <div class="preset-price">Free</div>
+                <div class="preset-price-note">Just enter your email and I'll send it your way.</div>
+                <div class="preset-cta-buttons">
+                    <a href="#" class="btn btn-primary" onclick="openModal('freePresetModal'); return false;">Download Free Preset</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- BASIC UTILITY PACK -->
+        <div class="preset-pack" id="basicPack">
+            <div class="preset-pack-header">
+                <span class="preset-badge paid">Basic Utility Pack</span>
+                <h2>The Everyday Essentials</h2>
+                <p>My go-to preset for travel, landscape, and lifestyle shots. Tap "Apply Preset" on either photo below to see the before and after.</p>
+            </div>
+
+            <div class="preset-comparisons two-up">
+                <div class="preset-comparison">
+                    <div class="preset-image-wrap" id="sicily1Preview">
+                        <span class="preset-label">Unedited Photo</span>
+                        <img loading="lazy"
+                             src="Presets/Images/Basic_Utility/Sicily1.Basic.jpg"
+                             data-before="Presets/Images/Basic_Utility/Sicily1.Basic.jpg"
+                             data-after="Presets/Images/Basic_Utility/Sicily1.Sicily1.jpg"
+                             data-before-label="Unedited Photo"
+                             data-after-label="With Sicily_1 Preset"
+                             alt="Unedited Sicily photo before applying the Sicily_1 preset">
+                    </div>
+                    <button type="button" class="btn btn-primary preset-toggle-btn" onclick="togglePreset('sicily1Preview', this)">Apply Preset</button>
+                </div>
+
+                <div class="preset-comparison">
+                    <div class="preset-image-wrap" id="sicily2Preview">
+                        <span class="preset-label">Unedited Photo</span>
+                        <img loading="lazy"
+                             src="Presets/Images/Basic_Utility/Sicily2.Basic.jpg"
+                             data-before="Presets/Images/Basic_Utility/Sicily2.Basic.jpg"
+                             data-after="Presets/Images/Basic_Utility/Sicily2.Sicily1.jpg"
+                             data-before-label="Unedited Photo"
+                             data-after-label="With Sicily_1 Preset"
+                             alt="Second unedited Sicily photo before applying the Sicily_1 preset">
+                    </div>
+                    <button type="button" class="btn btn-primary preset-toggle-btn" onclick="togglePreset('sicily2Preview', this)">Apply Preset</button>
+                </div>
+            </div>
+
+            <div class="preset-cta">
+                <div class="preset-price">$5</div>
+                <div class="preset-price-note">More photos and presets coming soon -- this is just the start of the pack.</div>
+                <div class="preset-cta-buttons">
+                    <a href="#" class="btn btn-primary" onclick="openModal('buyPresetModal'); return false;">Buy Preset Pack</a>
+                </div>
+                <span class="preset-secondary-note">Instant delivery via Gumroad, or pay by Venmo for slightly cheaper (manual delivery, usually within 24h).</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============================================================ -->
 <!-- MODALS -->
 <!-- ============================================================ -->
 
@@ -1562,6 +1850,75 @@
     </div>
 </div>
 
+<!-- Free Preset Modal -->
+<div class="modal-overlay" id="freePresetModal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal('freePresetModal')">&times;</button>
+        <div id="freePresetFormContent">
+            <h2>Get Your Free Preset</h2>
+            <p style="color: var(--text-med); margin-bottom: 1.2rem; font-size: 0.95rem;">Enter your email to join my mailing list and your free preset pack will download automatically. No spam -- just occasional new preset drops and photography tips.</p>
+            <form id="freePresetForm" onsubmit="submitFreePreset(event)">
+                <div class="form-group">
+                    <label for="freePresetEmail">Your Email</label>
+                    <input type="email" id="freePresetEmail" name="email" required placeholder="you@example.com">
+                </div>
+                <button type="submit" class="btn btn-primary form-submit">Send Me the Preset</button>
+            </form>
+        </div>
+        <div class="form-success" id="freePresetSuccess">
+            <h3>You're in!</h3>
+            <p>Your download should have started automatically. If it didn't, <a href="#" id="freePresetManualLink" style="color: var(--accent); font-weight: 500;">click here</a> to grab it.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-light);">Drop the .xmp file into Lightroom &rarr; Presets &rarr; Import. Happy editing!</p>
+        </div>
+    </div>
+</div>
+
+<!-- Buy Preset Modal -->
+<div class="modal-overlay" id="buyPresetModal">
+    <div class="modal" style="max-width: 560px;">
+        <button class="modal-close" onclick="closeModal('buyPresetModal')">&times;</button>
+        <div id="buyPresetFormContent">
+            <h2>Buy the Basic Utility Pack</h2>
+            <p style="color: var(--text-med); margin-bottom: 1.5rem; font-size: 0.95rem;">Pick how you'd like to pay. Both options get you the same preset pack.</p>
+
+            <!-- Gumroad option -->
+            <div style="background: var(--warm-white); border: 2px solid #eee; border-radius: 14px; padding: 1.3rem; margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <strong style="font-size: 1.05rem;">Gumroad &mdash; Instant download</strong>
+                    <span style="font-weight: 600; color: var(--accent);">$6</span>
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-med); margin-bottom: 1rem; line-height: 1.5;">Pay with card via Gumroad. The preset pack is emailed to you immediately and you can re-download anytime. Slightly higher price to cover the platform fee.</p>
+                <a href="https://gumroad.com/l/REPLACE-WITH-YOUR-GUMROAD-PRODUCT-ID" target="_blank" rel="noopener" class="btn btn-primary" style="display: block; text-align: center;">Buy on Gumroad &mdash; $6</a>
+            </div>
+
+            <!-- Venmo option -->
+            <div style="background: var(--warm-white); border: 2px solid #eee; border-radius: 14px; padding: 1.3rem;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <strong style="font-size: 1.05rem;">Venmo &mdash; Manual delivery</strong>
+                    <span style="font-weight: 600; color: var(--accent);">$5</span>
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-med); margin-bottom: 1rem; line-height: 1.5;">Send $5 to <strong>@SantoF</strong> on Venmo, then enter your email below. I'll send you the preset pack manually -- usually within 24 hours, but it can take a bit longer.</p>
+
+                <form id="buyPresetForm" onsubmit="submitBuyPreset(event)">
+                    <div class="form-group" style="margin-bottom: 0.8rem;">
+                        <label for="buyPresetEmail">Your Email (preset pack will be sent here)</label>
+                        <input type="email" id="buyPresetEmail" name="email" required placeholder="you@example.com">
+                    </div>
+                    <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+                        <a href="https://venmo.com/u/SantoF" target="_blank" rel="noopener" class="btn btn-coffee" style="flex: 1; text-align: center; min-width: 140px;">Pay $5 on Venmo</a>
+                        <button type="submit" class="btn btn-secondary form-submit" style="flex: 1; min-width: 140px; margin-top: 0;">Notify Santo</button>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.7rem; line-height: 1.4;">Tip: send the Venmo payment first, then click "Notify Santo" so I know to look for it.</p>
+                </form>
+            </div>
+        </div>
+        <div class="form-success" id="buyPresetSuccess">
+            <h3>Got it!</h3>
+            <p>Thanks! I'll confirm your Venmo payment and email you the preset pack as soon as I can.</p>
+        </div>
+    </div>
+</div>
+
 <!-- Photo Detail View -->
 <div class="photo-detail-overlay" id="photoDetail" onclick="if(event.target===this)closeDetail()">
     <div class="photo-detail">
@@ -1590,6 +1947,7 @@
         <a href="#" onclick="showPage('home', event)">Home</a>
         <a href="#" onclick="showPage('prints', event)">Prints</a>
         <a href="#" onclick="showPage('book', event)">Book</a>
+        <a href="#" onclick="showPage('presets', event)">Presets</a>
         <a href="#" onclick="openModal('contactModal')">Contact</a>
         <a href="https://www.instagram.com/santo.photos/" target="_blank" rel="noopener">Instagram</a>
     </div>
@@ -1697,7 +2055,7 @@ const printPhotos = [
     { file: "fun photos-fo prints/DSCF6112.jpg", num: 32, name: "Alpine Valley Vista", alt: "Aerial view of a lush green alpine valley with a village and winding road",
       story: "Looking down into a green alpine valley from high above. The tiny village and winding road gave a sense of just how vast this landscape is." },
     // --- PHOTO #33 ---
-    { file: "fun photos-fo prints/DSCF9550.jpg", num: 33, name: "Hillside Pup", alt: "A small dog resting in green grass on a misty hillside park",
+    { file: "fun photos-fo prints/DSCF9550.jpg", num: 33, name: "Torino Friend", alt: "A small dog resting in green grass on a misty hillside park",
 	story: "When I was studying abroad In Italy, some friend and me were walking up to this hill to enjoy the sunset and out 30 cent bottle of wine we had just purchased. As we were walking up a man around our age stopped us and asked if we were American. After talking to him we learnt he was called Ricky was a dual Italian-American raised in Italy. We told Ricky he should join us at the top of the hill for sunset. He did and this is a photo of his dog Cody. After this moment we started inviting Ricky to all of our group functions and he became one of my closets friends I met while studying abroad. "},  
 	// --- PHOTO #34 ---
     { file: "fun photos-fo prints/DSCF9814.jpg", num: 34, name: "Fire Spinner", alt: "Explosive steel wool fire spinning with sparks flying against a black night sky",
@@ -1762,7 +2120,7 @@ story: "A photo from my camping trip in Buena Vista. I sat on this rock watching
     // --- PHOTO #63 ---
     { file: "fun photos-fo prints/DSCF5499.jpg", num: 63, name: "Bridge Below", alt: "The Golden Gate Bridge towering overhead from below in vivid red and blue", story: "Shot from directly beneath, the Golden Gate Bridges iconic red towers and cables soar upward against a cloud-streaked sky. The dramatic low angle emphasizes the bridges monumental engineering and transforms a familiar landmark into something awe-inspiring." },
     // --- PHOTO #64 ---
-    { file: "fun photos-fo prints/DSCF5599-2.jpg", num: 64, name: "Italian Riviera", alt: "Colorful Italian seaside village with pastel buildings cascading toward the harbor", story: "Stacked rows of vibrant pastel buildings in pinks, yellows, and oranges tumble down a hillside toward a small Mediterranean harbor. The warm colors, small boats, and glittering sea beyond capture the irresistible charm of the Italian Riviera." },
+    { file: "fun photos-fo prints/DSCF5599-2.jpg", num: 64, name: "Genoa by the Sea", alt: "Colorful Italian seaside village with pastel buildings cascading toward the harbor", story: "Stacked rows of vibrant pastel buildings in pinks, yellows, and oranges tumble down a hillside toward a small Mediterranean harbor. The warm colors, small boats, and glittering sea beyond capture the irresistible charm of the Italian Riviera." },
     // --- PHOTO #65 ---
     { file: "fun photos-fo prints/DSCF5685.jpg", num: 65, name: "Snowy Campus", alt: "Red lamp post and snow-covered campus with falling snowflakes and parked bicycles", story: "A bright red lamp post stands as a bold focal point amid a fresh blanket of snow falling over a university campus. The contrast of the vivid red against the white snow and warm brick building creates a cozy, wintery scene." },
     // --- PHOTO #66 ---
@@ -2238,6 +2596,92 @@ function submitBooking(e) {
         document.getElementById('bookingFormContent'),
         document.getElementById('bookingSuccess'),
         'Submitting...'
+    );
+}
+
+// ===== PRESETS =====
+const FREE_PRESET_ZIP = 'Presets/Presets/Free/Fothergill_Free_Pack.zip';
+
+function togglePreset(wrapId, btn) {
+    const wrap = document.getElementById(wrapId);
+    const img = wrap.querySelector('img');
+    const label = wrap.querySelector('.preset-label');
+    const isEdited = wrap.classList.toggle('edited');
+
+    if (isEdited) {
+        img.src = img.dataset.after;
+        label.textContent = img.dataset.afterLabel;
+        btn.textContent = 'Show Original';
+    } else {
+        img.src = img.dataset.before;
+        label.textContent = img.dataset.beforeLabel;
+        btn.textContent = 'Apply Preset';
+    }
+}
+
+function downloadFreePreset() {
+    const a = document.createElement('a');
+    a.href = FREE_PRESET_ZIP;
+    a.download = 'Fothergill_Free_Pack.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+async function submitFreePreset(e) {
+    e.preventDefault();
+    const email = document.getElementById('freePresetEmail').value;
+    const formContent = document.getElementById('freePresetFormContent');
+    const successEl = document.getElementById('freePresetSuccess');
+    const btn = formContent.querySelector('.form-submit');
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                access_key: WEB3FORMS_KEY,
+                subject: 'Free Preset Signup - ' + email,
+                from_name: 'Free Preset Signup',
+                reply_to: email,
+                message: 'FREE PRESET / MAILING LIST SIGNUP\n==================================\n\nEmail: ' + email
+            })
+        });
+        const result = await response.json();
+        if (!result.success) throw new Error(result.message || 'Submission failed');
+
+        // Set up manual fallback link, then trigger automatic download
+        const manualLink = document.getElementById('freePresetManualLink');
+        manualLink.href = FREE_PRESET_ZIP;
+        manualLink.setAttribute('download', 'Fothergill_Free_Pack.zip');
+
+        formContent.style.display = 'none';
+        successEl.style.display = 'block';
+        downloadFreePreset();
+        showToast('Free preset on its way!');
+    } catch (err) {
+        showToast('Something went wrong: ' + err.message);
+        btn.textContent = originalText;
+        btn.disabled = false;
+    }
+}
+
+function submitBuyPreset(e) {
+    e.preventDefault();
+    const email = document.getElementById('buyPresetEmail').value;
+    sendForm(
+        {
+            subject: 'Preset Pack Venmo Purchase - ' + email,
+            from_name: 'Preset Purchase (Venmo)',
+            reply_to: email,
+            message: 'BASIC UTILITY PRESET PACK PURCHASE (VENMO)\n==========================================\n\nBuyer Email: ' + email + '\n\nACTION: Check Venmo @SantoF for a $5 payment and email the Basic Utility preset pack to the address above.'
+        },
+        document.getElementById('buyPresetFormContent'),
+        document.getElementById('buyPresetSuccess'),
+        'Notifying...'
     );
 }
 

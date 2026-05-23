@@ -958,6 +958,96 @@
             color: var(--text-light);
         }
 
+        /* Carousel */
+        .preset-carousel {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .preset-carousel-stage {
+            position: relative;
+        }
+
+        .preset-carousel-stage .preset-image-wrap {
+            aspect-ratio: 3 / 2;
+            background: #f0f0f0;
+        }
+
+        .preset-carousel-stage .preset-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.92);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            color: var(--text-dark);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .carousel-arrow:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .carousel-arrow.prev { left: 0.8rem; }
+        .carousel-arrow.next { right: 0.8rem; }
+
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .carousel-counter {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 0.4rem;
+            justify-content: center;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .carousel-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
         /* Mobile tweaks for presets */
         @media (max-width: 768px) {
             .preset-comparisons.two-up {
@@ -1664,46 +1754,42 @@
             <div class="preset-pack-header">
                 <span class="preset-badge paid">Basic Utility Pack</span>
                 <h2>The Everyday Essentials</h2>
-                <p>My go-to preset for travel, landscape, and lifestyle shots. Tap "Apply Preset" on either photo below to see the before and after.</p>
+                <p>My go-to presets for travel, landscape, and lifestyle shots. Flip through the carousel and tap "Apply Preset" on any photo to see the before and after.</p>
             </div>
 
-            <div class="preset-comparisons two-up">
-                <div class="preset-comparison">
-                    <div class="preset-image-wrap" id="sicily1Preview">
-                        <span class="preset-label">Unedited Photo</span>
-                        <img loading="lazy"
-                             src="Presets/Images/Basic_Utility/Sicily1.Basic.jpg"
-                             data-before="Presets/Images/Basic_Utility/Sicily1.Basic.jpg"
-                             data-after="Presets/Images/Basic_Utility/Sicily1.Sicily1.jpg"
-                             data-before-label="Unedited Photo"
-                             data-after-label="With Sicily_1 Preset"
-                             alt="Unedited Sicily photo before applying the Sicily_1 preset">
+            <div class="preset-carousel" id="basicCarousel">
+                <div class="preset-carousel-stage">
+                    <button type="button" class="carousel-arrow prev" onclick="carouselStep(-1)" aria-label="Previous photo">&#8592;</button>
+                    <div class="preset-comparison">
+                        <div class="preset-image-wrap" id="carouselPreview">
+                            <span class="preset-label">Unedited Photo</span>
+                            <img loading="lazy"
+                                 src=""
+                                 data-before=""
+                                 data-after=""
+                                 data-before-label="Unedited Photo"
+                                 data-after-label=""
+                                 alt="">
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-primary preset-toggle-btn" onclick="togglePreset('sicily1Preview', this)">Apply Preset</button>
+                    <button type="button" class="carousel-arrow next" onclick="carouselStep(1)" aria-label="Next photo">&#8594;</button>
                 </div>
 
-                <div class="preset-comparison">
-                    <div class="preset-image-wrap" id="sicily2Preview">
-                        <span class="preset-label">Unedited Photo</span>
-                        <img loading="lazy"
-                             src="Presets/Images/Basic_Utility/Sicily2.Basic.jpg"
-                             data-before="Presets/Images/Basic_Utility/Sicily2.Basic.jpg"
-                             data-after="Presets/Images/Basic_Utility/Sicily2.Sicily1.jpg"
-                             data-before-label="Unedited Photo"
-                             data-after-label="With Sicily_1 Preset"
-                             alt="Second unedited Sicily photo before applying the Sicily_1 preset">
-                    </div>
-                    <button type="button" class="btn btn-primary preset-toggle-btn" onclick="togglePreset('sicily2Preview', this)">Apply Preset</button>
+                <div class="carousel-controls">
+                    <button type="button" class="btn btn-primary preset-toggle-btn" id="carouselToggleBtn" onclick="togglePreset('carouselPreview', this)">Apply Preset</button>
+                    <div class="carousel-counter" id="carouselCounter">1 / 14</div>
                 </div>
+
+                <div class="carousel-dots" id="carouselDots"></div>
             </div>
 
             <div class="preset-cta">
                 <div class="preset-price">$5</div>
-                <div class="preset-price-note">More photos and presets coming soon -- this is just the start of the pack.</div>
+                <div class="preset-price-note">14 presets covering travel, landscape, and everyday lifestyle shots.</div>
                 <div class="preset-cta-buttons">
                     <a href="#" class="btn btn-primary" onclick="openModal('buyPresetModal'); return false;">Buy Preset Pack</a>
                 </div>
-                <span class="preset-secondary-note">Instant delivery via Gumroad, or pay by Venmo for slightly cheaper (manual delivery, usually within 24h).</span>
+                <span class="preset-secondary-note">Pay by Venmo ($5) -- delivered to your email, usually within 24h.</span>
             </div>
         </div>
 
@@ -1875,42 +1961,23 @@
 
 <!-- Buy Preset Modal -->
 <div class="modal-overlay" id="buyPresetModal">
-    <div class="modal" style="max-width: 560px;">
+    <div class="modal" style="max-width: 520px;">
         <button class="modal-close" onclick="closeModal('buyPresetModal')">&times;</button>
         <div id="buyPresetFormContent">
             <h2>Buy the Basic Utility Pack</h2>
-            <p style="color: var(--text-med); margin-bottom: 1.5rem; font-size: 0.95rem;">Pick how you'd like to pay. Both options get you the same preset pack.</p>
+            <p style="color: var(--text-med); margin-bottom: 1.5rem; font-size: 0.95rem;">Send <strong>$5</strong> to <strong>@SantoF</strong> on Venmo, then enter your email below and hit "Notify Santo." I'll confirm the payment and email the preset pack to you -- usually within 24 hours.</p>
 
-            <!-- Gumroad option -->
-            <div style="background: var(--warm-white); border: 2px solid #eee; border-radius: 14px; padding: 1.3rem; margin-bottom: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
-                    <strong style="font-size: 1.05rem;">Gumroad &mdash; Instant download</strong>
-                    <span style="font-weight: 600; color: var(--accent);">$6</span>
+            <form id="buyPresetForm" onsubmit="submitBuyPreset(event)">
+                <div class="form-group">
+                    <label for="buyPresetEmail">Your Email <span style="color: var(--text-light); font-weight: 400;">(preset pack will be sent here)</span></label>
+                    <input type="email" id="buyPresetEmail" name="email" required placeholder="you@example.com">
                 </div>
-                <p style="font-size: 0.88rem; color: var(--text-med); margin-bottom: 1rem; line-height: 1.5;">Pay with card via Gumroad. The preset pack is emailed to you immediately and you can re-download anytime. Slightly higher price to cover the platform fee.</p>
-                <a href="https://gumroad.com/l/REPLACE-WITH-YOUR-GUMROAD-PRODUCT-ID" target="_blank" rel="noopener" class="btn btn-primary" style="display: block; text-align: center;">Buy on Gumroad &mdash; $6</a>
-            </div>
-
-            <!-- Venmo option -->
-            <div style="background: var(--warm-white); border: 2px solid #eee; border-radius: 14px; padding: 1.3rem;">
-                <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
-                    <strong style="font-size: 1.05rem;">Venmo &mdash; Manual delivery</strong>
-                    <span style="font-weight: 600; color: var(--accent);">$5</span>
+                <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                    <a href="https://venmo.com/u/SantoF" target="_blank" rel="noopener" class="btn btn-coffee" style="flex: 1; text-align: center; min-width: 140px;">Pay $5 on Venmo</a>
+                    <button type="submit" class="btn btn-primary form-submit" style="flex: 1; min-width: 140px; margin-top: 0;">Notify Santo</button>
                 </div>
-                <p style="font-size: 0.88rem; color: var(--text-med); margin-bottom: 1rem; line-height: 1.5;">Send $5 to <strong>@SantoF</strong> on Venmo, then enter your email below. I'll send you the preset pack manually -- usually within 24 hours, but it can take a bit longer.</p>
-
-                <form id="buyPresetForm" onsubmit="submitBuyPreset(event)">
-                    <div class="form-group" style="margin-bottom: 0.8rem;">
-                        <label for="buyPresetEmail">Your Email (preset pack will be sent here)</label>
-                        <input type="email" id="buyPresetEmail" name="email" required placeholder="you@example.com">
-                    </div>
-                    <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
-                        <a href="https://venmo.com/u/SantoF" target="_blank" rel="noopener" class="btn btn-coffee" style="flex: 1; text-align: center; min-width: 140px;">Pay $5 on Venmo</a>
-                        <button type="submit" class="btn btn-secondary form-submit" style="flex: 1; min-width: 140px; margin-top: 0;">Notify Santo</button>
-                    </div>
-                    <p style="font-size: 0.8rem; color: var(--text-light); margin-top: 0.7rem; line-height: 1.4;">Tip: send the Venmo payment first, then click "Notify Santo" so I know to look for it.</p>
-                </form>
-            </div>
+                <p style="font-size: 0.82rem; color: var(--text-light); margin-top: 0.9rem; line-height: 1.5;">Tip: send the Venmo payment first, then click "Notify Santo" so I know to look for it.</p>
+            </form>
         </div>
         <div class="form-success" id="buyPresetSuccess">
             <h3>Got it!</h3>
@@ -2602,6 +2669,75 @@ function submitBooking(e) {
 // ===== PRESETS =====
 const FREE_PRESET_ZIP = 'Presets/Presets/Free/Fothergill_Free_Pack.zip';
 
+const BASIC_UTILITY_PHOTOS = [
+    { before: 'Presets/Images/Basic_Utility/Austria1.Basic.jpg',       after: 'Presets/Images/Basic_Utility/Austria1.Austria1.jpg',           preset: 'Austria_1',       alt: 'Austrian landscape before and after the Austria_1 preset' },
+    { before: 'Presets/Images/Basic_Utility/CrestedButte1.Basic.jpg',  after: 'Presets/Images/Basic_Utility/CrestedButte1.CrestedButte1.jpg', preset: 'CrestedButte_1',  alt: 'Crested Butte mountain scene before and after the CrestedButte_1 preset' },
+    { before: 'Presets/Images/Basic_Utility/CrestedButte2.Basic.jpg',  after: 'Presets/Images/Basic_Utility/CrestedButte2.CrestedButte2.jpg', preset: 'CrestedButte_2',  alt: 'Second Crested Butte scene before and after the CrestedButte_2 preset' },
+    { before: 'Presets/Images/Basic_Utility/Dolomites1.Basic.jpg',     after: 'Presets/Images/Basic_Utility/Dolomites1.Dolomites1.jpg',       preset: 'Dolomites_1',     alt: 'Dolomites landscape before and after the Dolomites_1 preset' },
+    { before: 'Presets/Images/Basic_Utility/Dolomites2.Basic2.jpg',    after: 'Presets/Images/Basic_Utility/Dolomites2.Dolomites2.jpg',       preset: 'Dolomites_2',     alt: 'Second Dolomites scene before and after the Dolomites_2 preset' },
+    { before: 'Presets/Images/Basic_Utility/Fuji1.Basic.jpg',          after: 'Presets/Images/Basic_Utility/Fuji1_Fuji1.jpg',                 preset: 'Fuji_1',          alt: 'Mount Fuji scene before and after the Fuji_1 preset' },
+    { before: 'Presets/Images/Basic_Utility/Japan1.Basic.jpg',         after: 'Presets/Images/Basic_Utility/Japan1.Japan1.jpg',               preset: 'Japan_1',         alt: 'Japan street scene before and after the Japan_1 preset' },
+    { before: 'Presets/Images/Basic_Utility/Olbia1.Basic.jpg',         after: 'Presets/Images/Basic_Utility/Olbia1.Olbia1.jpg',               preset: 'Olbia_1',         alt: 'Olbia coast before and after the Olbia_1 preset' },
+    { before: 'Presets/Images/Basic_Utility/Olbia2.Basic.jpg',         after: 'Presets/Images/Basic_Utility/Olbia2.Olbia2.jpg',               preset: 'Olbia_2',         alt: 'Second Olbia scene before and after the Olbia_2 preset' },
+    { before: 'Presets/Images/Basic_Utility/Prague1.Basic.jpg',        after: 'Presets/Images/Basic_Utility/Prague1.Prague1.jpg',             preset: 'Prague_1',        alt: 'Prague cityscape before and after the Prague_1 preset' },
+    { before: 'Presets/Images/Basic_Utility/Sicily1.Basic.jpg',        after: 'Presets/Images/Basic_Utility/Sicily1.Sicily1.jpg',             preset: 'Sicily_1',        alt: 'Sicily landscape before and after the Sicily_1 preset' },
+    { before: 'Presets/Images/Basic_Utility/Sicily2.Basic.jpg',        after: 'Presets/Images/Basic_Utility/Sicily2.Sicily1.jpg',             preset: 'Sicily_1',        alt: 'Second Sicily scene before and after the Sicily_1 preset' },
+    { before: 'Presets/Images/Basic_Utility/Tetons1.Basic.jpg',        after: 'Presets/Images/Basic_Utility/Tetons1.Tetons1.jpg',             preset: 'Tetons_1',        alt: 'Tetons landscape before and after the Tetons_1 preset' },
+    { before: 'Presets/Images/Basic_Utility/Tetons2.Basic.jpg',        after: 'Presets/Images/Basic_Utility/Tetons2.Tetons1.jpg',             preset: 'Tetons_1',        alt: 'Second Tetons scene before and after the Tetons_1 preset' },
+];
+
+let carouselIndex = 0;
+
+function renderCarousel() {
+    const photo = BASIC_UTILITY_PHOTOS[carouselIndex];
+    const wrap = document.getElementById('carouselPreview');
+    const img = wrap.querySelector('img');
+    const label = wrap.querySelector('.preset-label');
+    const btn = document.getElementById('carouselToggleBtn');
+
+    // Reset to "before" state on every photo change
+    wrap.classList.remove('edited');
+    img.src = photo.before;
+    img.dataset.before = photo.before;
+    img.dataset.after = photo.after;
+    img.dataset.beforeLabel = 'Unedited Photo';
+    img.dataset.afterLabel = 'With ' + photo.preset + ' Preset';
+    img.alt = photo.alt;
+    label.textContent = 'Unedited Photo';
+    btn.textContent = 'Apply Preset';
+
+    document.getElementById('carouselCounter').textContent = (carouselIndex + 1) + ' / ' + BASIC_UTILITY_PHOTOS.length;
+    document.querySelectorAll('#carouselDots .carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === carouselIndex);
+    });
+}
+
+function carouselStep(delta) {
+    const total = BASIC_UTILITY_PHOTOS.length;
+    carouselIndex = (carouselIndex + delta + total) % total;
+    renderCarousel();
+}
+
+function carouselJump(i) {
+    carouselIndex = i;
+    renderCarousel();
+}
+
+function initCarousel() {
+    const dots = document.getElementById('carouselDots');
+    if (!dots) return;
+    dots.innerHTML = '';
+    BASIC_UTILITY_PHOTOS.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'carousel-dot';
+        dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+        dot.onclick = () => carouselJump(i);
+        dots.appendChild(dot);
+    });
+    renderCarousel();
+}
+
 function togglePreset(wrapId, btn) {
     const wrap = document.getElementById(wrapId);
     const img = wrap.querySelector('img');
@@ -2690,6 +2826,7 @@ populatePrints();
 populateFavGrid();
 renderCalendar();
 renderTimeSlots();
+initCarousel();
 </script>
 
 </body>

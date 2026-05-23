@@ -1738,23 +1738,35 @@
             <div class="preset-pack-header">
                 <span class="preset-badge">Free Trial Pack</span>
                 <h2>Try Before You Buy</h2>
-                <p>Hit "Apply Preset" below to see exactly what my editing can do to a photo straight out of the camera.</p>
+                <p>Flip through the carousel and tap "Apply Preset" to see exactly what my editing can do to a photo straight out of the camera.</p>
             </div>
 
-            <div class="preset-comparisons">
-                <div class="preset-comparison">
-                    <div class="preset-image-wrap" id="freePreview">
-                        <span class="preset-label">Unedited Photo</span>
-                        <img loading="lazy"
-                             src="Presets/Images/Free/Cabo.Basic.jpg"
-                             data-before="Presets/Images/Free/Cabo.Basic.jpg"
-                             data-after="Presets/Images/Free/Cabo.Cabo1.jpg"
-                             data-before-label="Unedited Photo"
-                             data-after-label="With Cabo Preset"
-                             alt="Unedited photo before applying the free Cabo preset">
+            <div class="preset-carousel" id="freeCarousel">
+                <div class="preset-carousel-stage">
+                    <button type="button" class="carousel-arrow prev" onclick="carouselStep('free', -1)" aria-label="Previous photo">&#8592;</button>
+                    <div class="preset-comparison">
+                        <div class="preset-image-wrap" id="freeCarouselPreview">
+                            <div class="preset-image-frame">
+                                <span class="preset-label">Unedited Photo</span>
+                                <img loading="lazy"
+                                     src=""
+                                     data-before=""
+                                     data-after=""
+                                     data-before-label="Unedited Photo"
+                                     data-after-label=""
+                                     alt="">
+                            </div>
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-primary preset-toggle-btn" onclick="togglePreset('freePreview', this)">Apply Preset</button>
+                    <button type="button" class="carousel-arrow next" onclick="carouselStep('free', 1)" aria-label="Next photo">&#8594;</button>
                 </div>
+
+                <div class="carousel-controls">
+                    <button type="button" class="btn btn-primary preset-toggle-btn" id="freeCarouselToggleBtn" onclick="togglePreset('freeCarouselPreview', this)">Apply Preset</button>
+                    <div class="carousel-counter" id="freeCarouselCounter"></div>
+                </div>
+
+                <div class="carousel-dots" id="freeCarouselDots"></div>
             </div>
 
             <div class="preset-cta">
@@ -1776,9 +1788,9 @@
 
             <div class="preset-carousel" id="basicCarousel">
                 <div class="preset-carousel-stage">
-                    <button type="button" class="carousel-arrow prev" onclick="carouselStep(-1)" aria-label="Previous photo">&#8592;</button>
+                    <button type="button" class="carousel-arrow prev" onclick="carouselStep('basic', -1)" aria-label="Previous photo">&#8592;</button>
                     <div class="preset-comparison">
-                        <div class="preset-image-wrap" id="carouselPreview">
+                        <div class="preset-image-wrap" id="basicCarouselPreview">
                             <div class="preset-image-frame">
                                 <span class="preset-label">Unedited Photo</span>
                                 <img loading="lazy"
@@ -1791,15 +1803,15 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="carousel-arrow next" onclick="carouselStep(1)" aria-label="Next photo">&#8594;</button>
+                    <button type="button" class="carousel-arrow next" onclick="carouselStep('basic', 1)" aria-label="Next photo">&#8594;</button>
                 </div>
 
                 <div class="carousel-controls">
-                    <button type="button" class="btn btn-primary preset-toggle-btn" id="carouselToggleBtn" onclick="togglePreset('carouselPreview', this)">Apply Preset</button>
-                    <div class="carousel-counter" id="carouselCounter">1 / 14</div>
+                    <button type="button" class="btn btn-primary preset-toggle-btn" id="basicCarouselToggleBtn" onclick="togglePreset('basicCarouselPreview', this)">Apply Preset</button>
+                    <div class="carousel-counter" id="basicCarouselCounter"></div>
                 </div>
 
-                <div class="carousel-dots" id="carouselDots"></div>
+                <div class="carousel-dots" id="basicCarouselDots"></div>
             </div>
 
             <div class="preset-cta">
@@ -2688,6 +2700,11 @@ function submitBooking(e) {
 // ===== PRESETS =====
 const FREE_PRESET_ZIP = 'Presets/Presets/Free/Fothergill_Free_Pack.zip';
 
+const FREE_PRESET_PHOTOS = [
+    { before: 'Presets/Images/Free/Denver1.Basic.jpg', after: 'Presets/Images/Free/Denver1.Denver1.jpg', preset: 'Denver_1', alt: 'Denver skyline before and after the Denver_1 preset' },
+    { before: 'Presets/Images/Free/Cabo.Basic.jpg',             after: 'Presets/Images/Free/Cabo.Cabo1.jpg',               preset: 'Cabo_1',   alt: 'Cabo scene before and after the free Cabo_1 preset' },
+];
+
 const BASIC_UTILITY_PHOTOS = [
     { before: 'Presets/Images/Basic_Utility/Austria1.Basic.jpg',       after: 'Presets/Images/Basic_Utility/Austria1.Austria1.jpg',           preset: 'Austria_1',       alt: 'Austrian landscape before and after the Austria_1 preset' },
     { before: 'Presets/Images/Basic_Utility/CrestedButte1.Basic.jpg',  after: 'Presets/Images/Basic_Utility/CrestedButte1.CrestedButte1.jpg', preset: 'CrestedButte_1',  alt: 'Crested Butte mountain scene before and after the CrestedButte_1 preset' },
@@ -2705,14 +2722,32 @@ const BASIC_UTILITY_PHOTOS = [
     { before: 'Presets/Images/Basic_Utility/Tetons2.Basic.jpg',        after: 'Presets/Images/Basic_Utility/Tetons2.Tetons1.jpg',             preset: 'Tetons_1',        alt: 'Second Tetons scene before and after the Tetons_1 preset' },
 ];
 
-let carouselIndex = 0;
+const CAROUSELS = {
+    free: {
+        photos: FREE_PRESET_PHOTOS,
+        previewId: 'freeCarouselPreview',
+        toggleBtnId: 'freeCarouselToggleBtn',
+        counterId: 'freeCarouselCounter',
+        dotsId: 'freeCarouselDots',
+        index: 0,
+    },
+    basic: {
+        photos: BASIC_UTILITY_PHOTOS,
+        previewId: 'basicCarouselPreview',
+        toggleBtnId: 'basicCarouselToggleBtn',
+        counterId: 'basicCarouselCounter',
+        dotsId: 'basicCarouselDots',
+        index: 0,
+    },
+};
 
-function renderCarousel() {
-    const photo = BASIC_UTILITY_PHOTOS[carouselIndex];
-    const wrap = document.getElementById('carouselPreview');
+function renderCarousel(carouselId) {
+    const c = CAROUSELS[carouselId];
+    const photo = c.photos[c.index];
+    const wrap = document.getElementById(c.previewId);
     const img = wrap.querySelector('img');
     const label = wrap.querySelector('.preset-label');
-    const btn = document.getElementById('carouselToggleBtn');
+    const btn = document.getElementById(c.toggleBtnId);
 
     // Reset to "before" state on every photo change
     wrap.classList.remove('edited');
@@ -2725,36 +2760,38 @@ function renderCarousel() {
     label.textContent = 'Unedited Photo';
     btn.textContent = 'Apply Preset';
 
-    document.getElementById('carouselCounter').textContent = (carouselIndex + 1) + ' / ' + BASIC_UTILITY_PHOTOS.length;
-    document.querySelectorAll('#carouselDots .carousel-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === carouselIndex);
+    document.getElementById(c.counterId).textContent = (c.index + 1) + ' / ' + c.photos.length;
+    document.querySelectorAll('#' + c.dotsId + ' .carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === c.index);
     });
 }
 
-function carouselStep(delta) {
-    const total = BASIC_UTILITY_PHOTOS.length;
-    carouselIndex = (carouselIndex + delta + total) % total;
-    renderCarousel();
+function carouselStep(carouselId, delta) {
+    const c = CAROUSELS[carouselId];
+    const total = c.photos.length;
+    c.index = (c.index + delta + total) % total;
+    renderCarousel(carouselId);
 }
 
-function carouselJump(i) {
-    carouselIndex = i;
-    renderCarousel();
+function carouselJump(carouselId, i) {
+    CAROUSELS[carouselId].index = i;
+    renderCarousel(carouselId);
 }
 
-function initCarousel() {
-    const dots = document.getElementById('carouselDots');
+function initCarousel(carouselId) {
+    const c = CAROUSELS[carouselId];
+    const dots = document.getElementById(c.dotsId);
     if (!dots) return;
     dots.innerHTML = '';
-    BASIC_UTILITY_PHOTOS.forEach((_, i) => {
+    c.photos.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.type = 'button';
         dot.className = 'carousel-dot';
         dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
-        dot.onclick = () => carouselJump(i);
+        dot.onclick = () => carouselJump(carouselId, i);
         dots.appendChild(dot);
     });
-    renderCarousel();
+    renderCarousel(carouselId);
 }
 
 function togglePreset(wrapId, btn) {
@@ -2845,7 +2882,8 @@ populatePrints();
 populateFavGrid();
 renderCalendar();
 renderTimeSlots();
-initCarousel();
+initCarousel('free');
+initCarousel('basic');
 </script>
 
 </body>

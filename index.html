@@ -969,14 +969,31 @@
         }
 
         .preset-carousel-stage .preset-image-wrap {
-            aspect-ratio: 3 / 2;
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
+            overflow: visible;
+            text-align: center;
+            min-height: 200px;
+        }
+
+        .preset-image-frame {
+            display: inline-block;
+            position: relative;
+            max-width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+            line-height: 0;
             background: #f0f0f0;
         }
 
-        .preset-carousel-stage .preset-image-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .preset-carousel-stage .preset-image-frame img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 75vh;
+            display: block;
         }
 
         .carousel-arrow {
@@ -1762,14 +1779,16 @@
                     <button type="button" class="carousel-arrow prev" onclick="carouselStep(-1)" aria-label="Previous photo">&#8592;</button>
                     <div class="preset-comparison">
                         <div class="preset-image-wrap" id="carouselPreview">
-                            <span class="preset-label">Unedited Photo</span>
-                            <img loading="lazy"
-                                 src=""
-                                 data-before=""
-                                 data-after=""
-                                 data-before-label="Unedited Photo"
-                                 data-after-label=""
-                                 alt="">
+                            <div class="preset-image-frame">
+                                <span class="preset-label">Unedited Photo</span>
+                                <img loading="lazy"
+                                     src=""
+                                     data-before=""
+                                     data-after=""
+                                     data-before-label="Unedited Photo"
+                                     data-after-label=""
+                                     alt="">
+                            </div>
                         </div>
                     </div>
                     <button type="button" class="carousel-arrow next" onclick="carouselStep(1)" aria-label="Next photo">&#8594;</button>
